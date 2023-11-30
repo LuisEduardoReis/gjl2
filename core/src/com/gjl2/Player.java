@@ -8,13 +8,19 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Player extends Entity {
 
+    Player() {
+        this.collidesWithLevel = true;
+    }
+
     @Override
     void update(float delta) {
         float velocity = 5;
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) this.y += velocity * delta;
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) this.y -= velocity * delta;
+        float jumpVelocity = 5;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && this.vy == 0) this.vy = jumpVelocity;
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) this.x -= velocity * delta;
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) this.x += velocity * delta;
+
+        super.update(delta);
     }
 
     @Override
@@ -25,6 +31,6 @@ public class Player extends Entity {
     @Override
     public void renderShapes(ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(Color.RED);
-        shapeRenderer.circle(this.x, this.y, 0.3f, 24);
+        shapeRenderer.circle(this.x, this.y, this.radius, 24);
     }
 }
