@@ -16,7 +16,7 @@ public class Player extends Entity {
     void update(float delta) {
         float velocity = 5;
         float jumpVelocity = 5;
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && this.vy == 0) this.vy = jumpVelocity;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) /* && this.vy == 0 */) this.vy = jumpVelocity;
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) this.x -= velocity * delta;
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) this.x += velocity * delta;
 

@@ -1,11 +1,18 @@
 package com.gjl2;
 
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.gjl2.TileType.*;
 
 public class Level {
 
@@ -20,20 +27,32 @@ public class Level {
     Level() {
         this.entities = new LinkedList<>();
 
-        this.width = 16;
-        this.height = 16;
-        this.tiles = new Tile[this.width * this.height];
-        this.boundaryTile = new Tile(TileType.WALL);
+        TiledMap map = new TmxMapLoader(new InternalFileHandleResolver()).load("level.tmx");
+        this.width = (int) map.getProperties().get("width");
+        this.height = (int) map.getProperties().get("height");
 
+        this.tiles = new Tile[this.width * this.height];
         for (int i = 0; i < this.width * this.height; i++) {
-            this.tiles[i] = new Tile(Math.random() > 0.5 ? TileType.WALL : TileType.ROOM);
+            this.tiles[i] = new Tile(getTileType("wall"));
+        }
+        this.boundaryTile = new Tile(getTileType("wall"));
+
+        TiledMapTileLayer mapTiles = (TiledMapTileLayer) map.getLayers().get("tiles");
+        MapObjects mapObjects = map.getLayers().get("objects").getObjects();
+
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                TiledMapTileLayer.Cell cell = mapTiles.getCell(x, y);
+                getTile(x,y).type = getTileTypeById(cell.getTile().getId() - 1);
+            }
         }
 
+        MapObject spawn = mapObjects.get("spawn");
         this.player = new Player();
-        addEntity(this.player, 0,0);
+        addEntity(this.player, (Float) spawn.getProperties().get("x") / 16, (Float) spawn.getProperties().get("y")  / 16);
     }
 
-    private void addEntity(Entity entity, int x, int y) {
+    private void addEntity(Entity entity, float x, float y) {
         this.entities.add(entity);
         entity.x = x;
         entity.y = y;
@@ -92,16 +111,23 @@ public class Level {
         for (Entity entity : this.entities) {
             entity.renderSprites(spriteBatch);
         }
+
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                Tile tile = this.getTile(x,y);
+                spriteBatch.draw(Assets.getTileTextureById(tile.type.id), x,y,1,1);
+            }
+        }
     }
 
     public void renderShapes(ShapeRenderer shapeRenderer) {
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.height; x++) {
+        /*for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
                 Tile tile = this.getTile(x,y);
                 shapeRenderer.setColor(tile.type.solid ? Color.BLACK : Color.GRAY);
                 shapeRenderer.rect(x, y, 1,1);
             }
-        }
+        }*/
 
         for (Entity entity : this.entities) {
             entity.renderShapes(shapeRenderer);

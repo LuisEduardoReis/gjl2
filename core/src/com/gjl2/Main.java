@@ -7,6 +7,7 @@ public class Main extends Game {
 
 	public static final int WIDTH = 1920;
 	public static final int HEIGHT = 1080;
+	public static final int TILE_SIZE = 16;
 
 	@Override
 	public void create () {

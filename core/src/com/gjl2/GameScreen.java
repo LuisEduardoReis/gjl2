@@ -35,7 +35,7 @@ public class GameScreen extends ScreenAdapter {
 
         this.viewport.apply();
         this.camera.position.set(level.player.x, level.player.y, 0);
-        this.camera.zoom = (float) level.width / Main.WIDTH;
+        this.camera.zoom = (float) 32 / Main.WIDTH;
         this.camera.update();
 
         this.spriteBatch.setProjectionMatrix(camera.combined);
