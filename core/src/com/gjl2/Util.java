@@ -1,4 +1,6 @@
 package com.gjl2;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL32;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -28,4 +30,8 @@ public class Util {
         font.draw(batch, text, x - layout.width/2, y + layout.height/2);
     }
 
+    public static void enableBlending() {
+        Gdx.gl.glEnable(GL32.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL32.GL_SRC_ALPHA, GL32.GL_ONE_MINUS_SRC_ALPHA);
+    }
 }
