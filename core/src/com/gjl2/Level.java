@@ -35,10 +35,10 @@ public class Level {
         this.tiles = new Tile[this.width * this.height];
         this.overlayTiles = new Tile[this.width * this.height];
         for (int i = 0; i < this.width * this.height; i++) {
-            this.tiles[i] = new Tile(getTileType("wall"));
+            this.tiles[i] = new Tile(getTileType("empty"));
             this.overlayTiles[i] = new Tile(null);
         }
-        this.boundaryTile = new Tile(getTileType("wall"));
+        this.boundaryTile = new Tile(getTileType("empty"));
 
         TiledMapTileLayer mapTiles = (TiledMapTileLayer) map.getLayers().get("tiles");
         TiledMapTileLayer overlayTiles = (TiledMapTileLayer) map.getLayers().get("tiles_overlay");
