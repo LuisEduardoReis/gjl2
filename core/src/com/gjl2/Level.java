@@ -96,7 +96,7 @@ public class Level {
         }
 
         handleEntityCollisions();
-        handleCollisions();
+        handleLevelCollisions();
     }
 
     private void handleEntityCollisions() {
@@ -108,11 +108,10 @@ public class Level {
                     e.collide(o);
                 }
             }
-
         }
     }
 
-    private void handleCollisions() {
+    private void handleLevelCollisions() {
         for (Entity entity : this.entities) {
             if (!entity.collidesWithLevel) continue;
 
@@ -121,9 +120,11 @@ public class Level {
             float xr = entity.x - xc;
             float yr = entity.y - yc;
 
-            if (getTile(xc, yc).type.solid) {
+            if (entity.isTileSolid(getTile(xc, yc))) {
                 entity.x = entity.px;
                 entity.y = entity.py;
+                entity.vy = 0;
+                entity.vx = 0;
             }
 
             if (entity.isTileSolid(getTile(xc - 1, yc)) && xr < entity.radius) {

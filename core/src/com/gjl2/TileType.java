@@ -9,14 +9,14 @@ public class TileType {
     public static Map<String, TileType> TILETYPES = new HashMap<>();
 
     static {
-        createTileType(255, "test", new TileType(false, false));
-        createTileType(0, "empty", new TileType(true, false));
-        createTileType(1, "room", new TileType(false, false));
-        createTileType(2, "ladder", new TileType(false, true));
-        createTileType(16, "door", new TileType(false, false));
-        createTileType(17, "wall", new TileType(true, false));
-        createTileType(3, "shield_overlay", new TileType(false, false));
-        createTileType(4, "o2_overlay", new TileType(false, false));
+        createTileType(255, "test", new TileType(false));
+        createTileType(0, "empty", new TileType(true));
+        createTileType(1, "room", new TileType(false));
+        createTileType(2, "ladder", new TileType(false)).setLadder(true);
+        createTileType(16, "door", new TileType(false));
+        createTileType(17, "wall", new TileType(true));
+        createTileType(3, "shield_overlay", new TileType(false));
+        createTileType(4, "o2_overlay", new TileType(false));
     }
 
     public static TileType createTileType(int id, String name, TileType type) {
@@ -41,13 +41,18 @@ public class TileType {
         }
     }
 
-    public final boolean solid;
-    public final boolean ladder;
+    public boolean solid;
+    public boolean ladder;
     public int id;
     public String name;
 
-    TileType(boolean solid, boolean ladder) {
+    TileType(boolean solid) {
         this.solid = solid;
+        this.ladder = false;
+    }
+
+    public TileType setLadder(boolean ladder) {
         this.ladder = ladder;
+        return this;
     }
 }
