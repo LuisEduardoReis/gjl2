@@ -71,6 +71,7 @@ public class Hud {
         font.draw(spriteBatch, String.format("Oxygen level %d%%", (int) level.shipState.oxygenLevel), 25, 140);
         font.draw(spriteBatch, String.format("Shield level %d", level.shipState.shieldHits), 25, 70);
 
+        font.setColor(Color.WHITE);
         if (level.gameEvents.timeToNextAsteroid > 0) {
             font.draw(spriteBatch, String.format(String.format("Asteroid hit in %.1f", level.gameEvents.timeToNextAsteroid)), 0, Main.HEIGHT - 50);
         }

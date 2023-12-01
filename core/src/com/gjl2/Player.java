@@ -117,7 +117,8 @@ public class Player extends Entity {
     @Override
     public boolean isTileSolid(Tile tile) {
         if (tile.type.ladder) {
-            return this.y > tile.y + 1 && !Gdx.input.isKeyPressed(Input.Keys.DOWN);
+            Tile tileAt = this.level.getTile(this.x, this.y);
+            return !tileAt.type.ladder && this.y > tile.y + 1 && !Gdx.input.isKeyPressed(Input.Keys.DOWN);
         } else {
             return super.isTileSolid(tile);
         }
