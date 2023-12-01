@@ -4,20 +4,22 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Timer {
-    public float timer=0;
-    float cooldown;
+    private final float delay;
+    public float timer = 0;
     List<Runnable> callBacks = new LinkedList<>();
 
-    public Timer(float cooldown) {
-        this.cooldown = cooldown;
+    public Timer(float delay) {
+        this.delay = delay;
+        reset();
     }
 
     public void update(float delta){
-        timer = Util.stepTo(timer, 0, delta);
-        if(timer==0){
-            for (Runnable f : callBacks
-                 ) {
-                f.run();
+        if (timer > 0) {
+            timer = Util.stepTo(timer, 0, delta);
+            if(timer == 0){
+                for (Runnable f : callBacks) {
+                    f.run();
+                }
             }
         }
     }
@@ -27,6 +29,6 @@ public class Timer {
     }
 
     public void reset(){
-        timer = cooldown;
+        timer = delay;
     }
 }

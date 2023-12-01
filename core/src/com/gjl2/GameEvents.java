@@ -14,10 +14,12 @@ public class GameEvents {
     List<Runnable> events = new LinkedList<>();
     List<Timer> timers = new LinkedList<>();
 
+    float timeToNextAsteroid = -1;
+
     float timeToEvent;
     public GameEvents(Level level) {
         this.level = level;
-        timeToEvent = 0;
+        timeToEvent = 1000000f;
 
         events.add(this::asteroidEvent);
     }
@@ -30,9 +32,16 @@ public class GameEvents {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) this.rollEvent();
-        for (Timer t : timers
-             ) {
+        for (Timer t : timers) {
             t.update(delta);
+        }
+
+        if (timeToNextAsteroid > 0) {
+            timeToNextAsteroid = Util.stepTo(timeToNextAsteroid, 0, delta);
+            if (timeToNextAsteroid == 0) {
+                eventAsteroidHit();
+                timeToNextAsteroid = -1;
+            }
         }
     }
 
@@ -43,33 +52,31 @@ public class GameEvents {
 
     private void asteroidEvent() {
         this.level.gameScreen.hud.addWarning("Incoming Asteroid!!!");
-        Timer asteroidTimer = new Timer(5);
-        asteroidTimer.addCallback(this::eventAsteroidHit);
-        timers.add(asteroidTimer);
+        this.timeToNextAsteroid = 5;
     }
 
     private void eventAsteroidHit() {
         if (level.shipState.shieldHits > 0 ){
             level.shipState.shieldHits--;
             this.level.gameScreen.hud.addWarning("Asteroid deflected!");
-            return;
-        }
-        for (int i = 0; i < 100; i++) {
-            float x = (float) (Math.floor(Util.randomRange(0, this.level.width)) + 0.5f);
-            float y = (float) (Math.floor(Util.randomRange(0, this.level.height)) + 0.5f);
+        } else {
+            for (int i = 0; i < 100; i++) {
+                float x = (float) (Math.floor(Util.randomRange(0, this.level.width)) + 0.5f);
+                float y = (float) (Math.floor(Util.randomRange(0, this.level.height)) + 0.5f);
 
-            Tile tile = this.level.getTile(x,y);
-            if (tile.type != TileType.getTileType("room")) continue;
+                Tile tile = this.level.getTile(x,y);
+                if (tile.type != TileType.getTileType("room")) continue;
 
-            Tile tileBelow = this.level.getTile(x,y - 1);
-            if (!tileBelow.type.solid) continue;
+                Tile tileBelow = this.level.getTile(x,y - 1);
+                if (!tileBelow.type.solid) continue;
 
-            Tile overlayTile = this.level.getTileOverlay(x,y);
-            if (overlayTile.type != null) continue;
+                Tile overlayTile = this.level.getTileOverlay(x,y);
+                if (overlayTile.type != null) continue;
 
-            this.level.gameScreen.hud.addWarning("Asteroid hit!");
-            this.level.addEntity(new AsteroidHit(), x,y);
-            break;
+                this.level.gameScreen.hud.addWarning("Asteroid hit!");
+                this.level.addEntity(new AsteroidHit(), x,y);
+                break;
+            }
         }
     }
 }

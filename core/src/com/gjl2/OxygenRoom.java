@@ -13,7 +13,9 @@ public class OxygenRoom extends Entity {
 
     @Override
     void collide(Entity other, float delta) {
-        this.level.shipState.oxygenLevel = Util.stepTo(this.level.shipState.oxygenLevel, 100, 20*delta);
+        if (other instanceof Player) {
+            this.level.shipState.oxygenLevel = Util.stepTo(this.level.shipState.oxygenLevel, 100, 20*delta);
+        }
     }
 }
 
