@@ -12,15 +12,16 @@ public class TileType {
         for (int i = 0; i < 255; i++) {
             createTileType(i, new TileType(true));
         }
-        getTileTypeBySheetPosition(1,0).setSolid(false);
-        getTileTypeBySheetPosition(2,0).setSolid(false).setLadder(true);
-        getTileTypeBySheetPosition(0,1).setSolid(false);
+        getTileTypeBySheetPosition(1,0).setSolid(false).setName("room");
+        getTileTypeBySheetPosition(2,0).setSolid(false).setLadder(true).setName("ladder");
+        getTileTypeBySheetPosition(0,1).setSolid(false).setName("door_frame");
     }
 
     public static void createTileType(int id, TileType type) {
         TILETYPES_BY_ID.put(id, type);
         type.id = id;
     }
+
     public static TileType getTileType(String name) {
         if (TILETYPES.containsKey(name)) {
             return TILETYPES.get(name);
@@ -45,6 +46,7 @@ public class TileType {
 
     public boolean solid;
     public boolean ladder;
+    private String name;
     public int id;
 
     TileType(boolean solid) {
@@ -58,6 +60,11 @@ public class TileType {
     }
     private TileType setSolid(boolean solid) {
         this.solid = solid;
+        return this;
+    }
+    private TileType setName(String name) {
+        this.name = name;
+        TILETYPES.put(name, this);
         return this;
     }
 }

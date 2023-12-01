@@ -9,12 +9,11 @@ public class OxygenRoom extends Entity {
 
     @Override
     void update(float delta) {
-        this.level.O2Level = Util.stepTo(level.O2Level, 0, delta * 100 / 150);
     }
 
     @Override
     void collide(Entity other, float delta) {
-        this.level.O2Level = Util.stepTo(level.O2Level, 100, 20*delta);
+        this.level.shipState.oxygenLevel = Util.stepTo(this.level.shipState.oxygenLevel, 100, 20*delta);
     }
 }
 

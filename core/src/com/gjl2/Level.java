@@ -27,11 +27,13 @@ public class Level {
 
     GameEvents gameEvents;
 
-    public float O2Level;
+    ShipState shipState;
 
     Level(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
+
         this.gameEvents = new GameEvents(this);
+        this.shipState = new ShipState(this);
         this.entities = new LinkedList<>();
 
         TiledMap map = new TmxMapLoader(new InternalFileHandleResolver()).load("level3.tmx");
@@ -68,8 +70,6 @@ public class Level {
         addEntity(this.player, 0,0);
 
         if (mapObjects != null) setupMapObjects(mapObjects);
-
-        O2Level = 100;
     }
 
     private void setupMapObjects(MapObjects mapObjects) {
@@ -93,7 +93,7 @@ public class Level {
         }
     }
 
-    private void addEntity(Entity entity, float x, float y) {
+    public void addEntity(Entity entity, float x, float y) {
         this.entities.add(entity);
         entity.x = x;
         entity.y = y;
@@ -109,6 +109,7 @@ public class Level {
         }
 
         this.gameEvents.update(delta);
+        this.shipState.update(delta);
 
         handleEntityCollisions(delta);
         handleLevelCollisions();
@@ -208,5 +209,9 @@ public class Level {
     public Tile getTileOverlay(int x, int y) {
         if (x < 0 || x >= this.width || y < 0 || y >= this.height) return this.boundaryTile;
         return this.overlayTiles[y * this.width + x];
+    }
+
+    public Tile getTileOverlay(float x, float y) {
+        return getTileOverlay((int) Math.floor(x), (int) Math.floor(y));
     }
 }
