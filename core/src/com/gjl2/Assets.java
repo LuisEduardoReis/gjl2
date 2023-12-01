@@ -5,6 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static com.gjl2.Main.TILE_SIZE;
 
 public class Assets {
@@ -17,7 +21,8 @@ public class Assets {
     static TextureRegion[][] spriteTextures;
 
     public static TextureRegion doorSprite;
-    public static TextureRegion playerSprite;
+    public static List<TextureRegion> playerMovement = new ArrayList<>(4);
+    public static TextureRegion playerBack;
     public static TextureRegion asteroidHitSprite;
     public static TextureRegion toolboxSprite;
 
@@ -33,7 +38,11 @@ public class Assets {
         spriteTextures = TextureRegion.split(spritesheet, TILE_SIZE, TILE_SIZE);
 
         doorSprite = spriteTextures[0][1];
-        playerSprite = spriteTextures[0][2];
+        playerMovement.add(spriteTextures[0][2]);
+        playerMovement.add(spriteTextures[0][3]);
+        playerMovement.add(spriteTextures[0][2]);
+        playerMovement.add(spriteTextures[0][4]);
+        playerBack = spriteTextures[0][5];
         asteroidHitSprite = spriteTextures[1][0];
         toolboxSprite = spriteTextures[1][1];
     }

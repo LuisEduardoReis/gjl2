@@ -10,9 +10,12 @@ import com.badlogic.gdx.math.Affine2;
 public class Player extends Entity {
 
     public static float IDLE_DELAY = 0.2f;
+    public static float ANIMATION_DELAY = 0.1f;
 
     boolean goingRight = true;
     float idleTimer = 0;
+    float animationTimer = 0;
+    int animationFrame = 0;
 
     Player() {
         this.radius = 0.4f;
@@ -49,6 +52,12 @@ public class Player extends Entity {
         }
 
         this.idleTimer = Util.stepTo(this.idleTimer, 0, delta);
+        this.animationTimer = Util.stepTo(this.animationTimer, 0, delta);
+
+        if (this.animationTimer == 0) {
+            this.animationTimer = ANIMATION_DELAY;
+            this.animationFrame = (this.animationFrame + 1) % Assets.playerMovement.size();
+        }
 
         super.update(delta);
     }
@@ -68,6 +77,8 @@ public class Player extends Entity {
     Affine2 affine2 = new Affine2();
     @Override
     public void renderSprites(SpriteBatch spriteBatch) {
+        Tile currentTile = this.level.getTile(this.x, this.y);
+        Tile tileAtFeet = this.level.getTile(this.x, this.y-this.radius-0.01f);
         affine2.idt();
         float r = this.radius;
         affine2.translate(this.x - r, this.y - r);
@@ -75,7 +86,14 @@ public class Player extends Entity {
         affine2.scale(this.goingRight ? -1 : 1, 1);
         affine2.translate(-r, -r);
 
-        spriteBatch.draw(Assets.playerSprite, r * 2, r * 2, affine2);
+        if (currentTile.type.ladder && !tileAtFeet.type.solid) {
+            spriteBatch.draw(Assets.playerBack, r * 2, r * 2, affine2);
+        } else if (isMoving()) {
+            spriteBatch.draw(Assets.playerMovement.get(this.animationFrame), r * 2, r * 2, affine2);
+        }
+        else {
+            spriteBatch.draw(Assets.playerMovement.get(0), r * 2, r * 2, affine2);
+        }
     }
 
     @Override
@@ -91,5 +109,9 @@ public class Player extends Entity {
         } else {
             return super.isTileSolid(tile);
         }
+    }
+
+    public boolean isMoving() {
+        return idleTimer != 0;
     }
 }
