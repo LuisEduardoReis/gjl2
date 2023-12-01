@@ -30,6 +30,7 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        delta = Math.min(2 * 1.0f / Main.FPS, delta); // que lixo
         this.level.update(delta);
 
         ScreenUtils.clear(0,0,0,1);
