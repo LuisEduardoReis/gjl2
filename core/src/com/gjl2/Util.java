@@ -17,6 +17,11 @@ public class Util {
         return (float) Math.sqrt((x * x) + (y * y));
     }
 
+    public static float stepTo(float a, float b, float x) {
+        if (Math.abs(b - a) < x) return b;
+        else return a + x * Math.signum(b - a);
+    }
+
     static GlyphLayout layout = new GlyphLayout();
     public static void drawTextCentered(SpriteBatch batch, BitmapFont font, String text, float x, float y) {
         layout.setText(font, text);
