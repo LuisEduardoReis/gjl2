@@ -58,7 +58,7 @@ public class Hud {
         Level level = this.gameScreen.level;
         font.setColor(Color.GREEN);
         font.getData().setScale(2f);
-        Util.drawTextCentered(spriteBatch, font, String.format("Hull status 100/100\nOxygen level %d%%\nShield level 3", (int) level.shipState.oxygenLevel), 365,100);
+        Util.drawTextCentered(spriteBatch, font, String.format("Hull status 100/100\nOxygen level %d%%\nShield level %d", (int) level.shipState.oxygenLevel, level.shipState.shieldHits),  365,100);
 
         font.setColor(Color.WHITE);
         for (int i = 0; i < messages.size() && i < 10; i++) {

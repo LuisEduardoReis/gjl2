@@ -37,7 +37,7 @@ public class Level {
         this.shipState = new ShipState(this);
         this.entities = new LinkedList<>();
 
-        TiledMap map = new TmxMapLoader(new InternalFileHandleResolver()).load("level3.tmx");
+        TiledMap map = new TmxMapLoader(new InternalFileHandleResolver()).load("level.tmx");
         this.width = (int) map.getProperties().get("width");
         this.height = (int) map.getProperties().get("height");
 

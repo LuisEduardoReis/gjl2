@@ -37,6 +37,11 @@ public class GameEvents {
     }
 
     private void eventAsteroidHit() {
+        if (level.shipState.shieldHits > 0 ){
+            level.shipState.shieldHits--;
+            this.level.gameScreen.hud.addWarning("Asteroid deflected!");
+            return;
+        }
         for (int i = 0; i < 100; i++) {
             float x = (float) (Math.floor(Util.randomRange(0, this.level.width)) + 0.5f);
             float y = (float) (Math.floor(Util.randomRange(0, this.level.height)) + 0.5f);
