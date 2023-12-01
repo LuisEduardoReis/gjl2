@@ -17,6 +17,7 @@ public class GameScreen extends ScreenAdapter {
     SpriteBatch spriteBatch;
     ShapeRenderer shapeRenderer;
     Level level;
+    Hud hud;
 
     OrthographicCamera camera;
     Viewport viewport;
@@ -26,7 +27,8 @@ public class GameScreen extends ScreenAdapter {
         this.spriteBatch = new SpriteBatch();
         this.shapeRenderer = new ShapeRenderer();
 
-        this.level = new Level();
+        this.level = new Level(this);
+        this.hud = new Hud(this);
         this.camera = new OrthographicCamera(Main.WIDTH, Main.HEIGHT);
         this.viewport = new FitViewport(Main.WIDTH, Main.HEIGHT, camera);
     }
@@ -34,6 +36,7 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         delta = Math.min(2 * 1.0f / Main.FPS, delta); // que lixo
+        this.hud.update(delta);
         this.level.update(delta);
 
         ScreenUtils.clear(0,0,0,1);
@@ -53,7 +56,6 @@ public class GameScreen extends ScreenAdapter {
         this.level.renderShapes(this.shapeRenderer);
         this.shapeRenderer.end();
 
-
         this.camera.position.set(Main.WIDTH/2f,Main.HEIGHT/2f,0);
         this.camera.zoom = 1;
         this.camera.update();
@@ -62,17 +64,12 @@ public class GameScreen extends ScreenAdapter {
 
         Util.enableBlending();
         this.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        this.shapeRenderer.setColor(0,0,0, 0.5f);
-        this.shapeRenderer.rect(0,0, 730, 225);
+        this.hud.renderShapes(shapeRenderer);
         this.shapeRenderer.end();
 
-        BitmapFont font = Assets.font;
-        font.setColor(Color.GREEN);
-        font.getData().setScale(2f);
         this.spriteBatch.begin();
-        Util.drawTextCentered(spriteBatch, font, String.format("Hull status 100/100\nOxygen level %f\nShield level 3", level.O2Level), 365,100);
+        this.hud.renderText(spriteBatch);
         this.spriteBatch.end();
-
     }
 
     @Override

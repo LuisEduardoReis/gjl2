@@ -16,7 +16,7 @@ import static com.gjl2.TileType.*;
 
 public class Level {
 
-
+    GameScreen gameScreen;
     Player player;
     List<Entity> entities;
 
@@ -27,7 +27,8 @@ public class Level {
 
     public float O2Level;
 
-    Level() {
+    Level(GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
         this.entities = new LinkedList<>();
 
         TiledMap map = new TmxMapLoader(new InternalFileHandleResolver()).load("level.tmx");
@@ -65,7 +66,7 @@ public class Level {
 
         if (mapObjects != null) setupMapObjects(mapObjects);
 
-        O2Level = 80;
+        O2Level = 100;
     }
 
     private void setupMapObjects(MapObjects mapObjects) {

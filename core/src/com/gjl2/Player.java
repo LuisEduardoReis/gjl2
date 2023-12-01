@@ -28,7 +28,9 @@ public class Player extends Entity {
             if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) this.y -= velocity * delta;
         } else {
             this.hasGravity = true;
-            if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && this.vy == 0) this.vy = jumpVelocity;
+            if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && this.vy == 0) {
+                this.vy = jumpVelocity;
+            }
         }
 
         super.update(delta);

@@ -30,6 +30,11 @@ public class Util {
         font.draw(batch, text, x - layout.width/2, y + layout.height/2);
     }
 
+    public static void drawTextAlignRight(SpriteBatch batch, BitmapFont font, String text, float x, float y) {
+        layout.setText(font, text);
+        font.draw(batch, text, x - layout.width, y);
+    }
+
     public static void enableBlending() {
         Gdx.gl.glEnable(GL32.GL_BLEND);
         Gdx.gl.glBlendFunc(GL32.GL_SRC_ALPHA, GL32.GL_ONE_MINUS_SRC_ALPHA);
