@@ -8,6 +8,7 @@ public class Door extends Entity implements Interactable {
     float openState = 0;
 
     public Door() {
+        this.z = 1;
         this.radius = 0.75f;
     }
 

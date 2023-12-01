@@ -183,6 +183,7 @@ public class Level {
             }
         }
 
+        entities.sort((a,b) -> Float.compare(a.z, b.z));
         for (Entity entity : this.entities) {
             entity.renderSprites(spriteBatch);
         }

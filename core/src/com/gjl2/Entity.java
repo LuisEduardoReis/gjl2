@@ -10,6 +10,7 @@ public class Entity {
     public Level level;
     public float x = 0;
     public float y = 0;
+    public float z = 0;
     public float vx = 0;
     public float vy = 0;
     public float px = 0;

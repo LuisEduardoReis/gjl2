@@ -18,6 +18,8 @@ public class Assets {
 
     public static TextureRegion doorSprite;
     public static TextureRegion playerSprite;
+    public static TextureRegion asteroidHitSprite;
+
     public static BitmapFont font;
 
     public static void createAssets() {
@@ -31,6 +33,7 @@ public class Assets {
 
         doorSprite = spriteTextures[0][1];
         playerSprite = spriteTextures[0][2];
+        asteroidHitSprite = spriteTextures[1][0];
     }
 
     static TextureRegion getTileTextureById(int id) {

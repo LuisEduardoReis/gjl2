@@ -1,6 +1,7 @@
 package com.gjl2;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class AsteroidHit extends Entity implements Interactable {
@@ -8,6 +9,9 @@ public class AsteroidHit extends Entity implements Interactable {
     public float fixState = 0;
     public float fixDelay = 4;
 
+    public AsteroidHit() {
+        this.z = -1;
+    }
 
     @Override
     void update(float delta) {
@@ -20,10 +24,12 @@ public class AsteroidHit extends Entity implements Interactable {
     }
 
     @Override
-    public void renderShapes(ShapeRenderer shapeRenderer) {
-        shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.circle(this.x, this.y, this.radius, 24);
+    public void renderSprites(SpriteBatch spriteBatch) {
+        spriteBatch.draw(Assets.asteroidHitSprite, this.x - 0.5f, this.y - 0.5f, 1,1);
+    }
 
+    @Override
+    public void renderShapes(ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(Color.GREEN);
         shapeRenderer.rect(this.x - 0.25f, this.y + 0.35f, 0.5f * this.fixState, 0.1f);
     }
