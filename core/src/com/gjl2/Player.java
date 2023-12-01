@@ -13,6 +13,7 @@ public class Player extends Entity {
     public static float ANIMATION_DELAY = 0.1f;
 
     boolean goingRight = true;
+    boolean isClimbing = false;
     float idleTimer = 0;
     float animationTimer = 0;
     int animationFrame = 0;
@@ -26,6 +27,7 @@ public class Player extends Entity {
 
     @Override
     void update(float delta) {
+        isClimbing = false;
         float velocity = 5;
         float jumpVelocity = 5;
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
@@ -43,8 +45,14 @@ public class Player extends Entity {
         if (currentTile.type.ladder) {
             this.vy = 0;
             this.hasGravity = false;
-            if (Gdx.input.isKeyPressed(Input.Keys.UP)) this.y += velocity * delta;
-            if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) this.y -= velocity * delta;
+            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+                this.y += velocity * delta;
+                isClimbing = true;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+                this.y -= velocity * delta;
+                isClimbing = true;
+            }
         } else {
             this.hasGravity = true;
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && this.vy == 0) {
@@ -87,7 +95,11 @@ public class Player extends Entity {
         affine2.translate(-r, -r);
 
         if (currentTile.type.ladder && !tileAtFeet.type.solid) {
-            spriteBatch.draw(Assets.playerBack, r * 2, r * 2, affine2);
+            if (this.isClimbing) {
+                spriteBatch.draw(Assets.playerClimbing.get(this.animationFrame % 2), r * 2, r * 2, affine2);
+            } else {
+                spriteBatch.draw(Assets.playerClimbing.get(0), r * 2, r * 2, affine2);
+            }
         } else if (isMoving()) {
             spriteBatch.draw(Assets.playerMovement.get(this.animationFrame), r * 2, r * 2, affine2);
         }
