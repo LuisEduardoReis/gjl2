@@ -17,6 +17,7 @@ public class Assets {
     static TextureRegion[][] spriteTextures;
 
     public static TextureRegion doorSprite;
+    public static TextureRegion playerSprite;
     public static BitmapFont font;
 
     public static void createAssets() {
@@ -29,6 +30,7 @@ public class Assets {
         spriteTextures = TextureRegion.split(spritesheet, TILE_SIZE, TILE_SIZE);
 
         doorSprite = spriteTextures[0][1];
+        playerSprite = spriteTextures[0][2];
     }
 
     static TextureRegion getTileTextureById(int id) {

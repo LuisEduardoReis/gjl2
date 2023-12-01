@@ -1,5 +1,7 @@
 package com.gjl2;
 
 public interface Interactable {
-    public void interact(Player player);
+    default void interact(Player player) {};
+
+    default void interactHold(Player player, float delta) {};
 }

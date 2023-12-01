@@ -17,6 +17,7 @@ public class Entity {
     public boolean hasGravity = false;
     public float radius = 0.25f;
     public boolean collidesWithLevel = false;
+    public boolean remove = false;
 
     Entity() {
     }

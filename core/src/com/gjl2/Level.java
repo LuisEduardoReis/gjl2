@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.gjl2.TileType.*;
 
@@ -113,6 +114,10 @@ public class Level {
 
         handleEntityCollisions(delta);
         handleLevelCollisions();
+
+        if (this.entities.stream().anyMatch(e -> e.remove)) {
+            this.entities = this.entities.stream().filter(e -> !e.remove).collect(Collectors.toList());
+        }
     }
 
     private void handleEntityCollisions(float delta) {

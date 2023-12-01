@@ -18,7 +18,6 @@ public class GameEvents {
         this.level = level;
         timeToEvent = Util.randomRange(10, 15);
 
-        events.add(this::eventOxygenLeak);
         events.add(this::eventAsteroidHit);
     }
 
@@ -37,10 +36,6 @@ public class GameEvents {
         events.get(roll).run();
     }
 
-    private void eventOxygenLeak() {
-        this.level.gameScreen.hud.addWarning("Oxygen leak detected!");
-        this.level.shipState.isLeakingOxygen = true;
-    }
     private void eventAsteroidHit() {
         for (int i = 0; i < 100; i++) {
             float x = (float) (Math.floor(Util.randomRange(0, this.level.width)) + 0.5f);
@@ -48,6 +43,9 @@ public class GameEvents {
 
             Tile tile = this.level.getTile(x,y);
             if (tile.type != TileType.getTileType("room")) continue;
+
+            Tile tileBelow = this.level.getTile(x,y - 1);
+            if (!tileBelow.type.solid) continue;
 
             Tile overlayTile = this.level.getTileOverlay(x,y);
             if (overlayTile.type != null) continue;

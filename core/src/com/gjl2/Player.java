@@ -5,10 +5,17 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Affine2;
 
 public class Player extends Entity {
 
+    public static float IDLE_DELAY = 0.2f;
+
+    boolean goingRight = true;
+    float idleTimer = 0;
+
     Player() {
+        this.radius = 0.4f;
         this.hasGravity = true;
         this.collidesWithLevel = true;
     }
@@ -17,8 +24,16 @@ public class Player extends Entity {
     void update(float delta) {
         float velocity = 5;
         float jumpVelocity = 5;
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) this.x -= velocity * delta;
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) this.x += velocity * delta;
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            this.x -= velocity * delta;
+            this.goingRight = false;
+            this.idleTimer = IDLE_DELAY;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            this.x += velocity * delta;
+            this.goingRight = true;
+            this.idleTimer = IDLE_DELAY;
+        }
 
         Tile currentTile = this.level.getTile(this.x, this.y);
         if (currentTile.type.ladder) {
@@ -33,25 +48,40 @@ public class Player extends Entity {
             }
         }
 
+        this.idleTimer = Util.stepTo(this.idleTimer, 0, delta);
+
         super.update(delta);
     }
 
     @Override
     void collide(Entity other, float delta) {
-        if (other instanceof Interactable && Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            ((Interactable) other).interact(this);
+        if (other instanceof Interactable) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                ((Interactable) other).interact(this);
+            } else if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                ((Interactable) other).interactHold(this, delta);
+            }
+
         }
     }
 
+    Affine2 affine2 = new Affine2();
     @Override
     public void renderSprites(SpriteBatch spriteBatch) {
-        //spriteBatch.draw(Assets.testTexture, this.x, this.y);
+        affine2.idt();
+        float r = this.radius;
+        affine2.translate(this.x - r, this.y - r);
+        affine2.translate(r, r);
+        affine2.scale(this.goingRight ? -1 : 1, 1);
+        affine2.translate(-r, -r);
+
+        spriteBatch.draw(Assets.playerSprite, r * 2, r * 2, affine2);
     }
 
     @Override
     public void renderShapes(ShapeRenderer shapeRenderer) {
-        shapeRenderer.setColor(Color.RED);
-        shapeRenderer.circle(this.x, this.y, this.radius, 24);
+        //shapeRenderer.setColor(Color.RED);
+        //shapeRenderer.circle(this.x, this.y, this.radius, 24);
     }
 
     @Override
