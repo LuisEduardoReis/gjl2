@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class Player extends Entity {
 
     Player() {
+        this.hasGravity = true;
         this.collidesWithLevel = true;
     }
 
@@ -34,6 +35,13 @@ public class Player extends Entity {
     }
 
     @Override
+    void collide(Entity other) {
+        if (other instanceof Interactable && Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            ((Interactable) other).interact(this);
+        }
+    }
+
+    @Override
     public void renderSprites(SpriteBatch spriteBatch) {
         //spriteBatch.draw(Assets.testTexture, this.x, this.y);
     }
@@ -45,11 +53,11 @@ public class Player extends Entity {
     }
 
     @Override
-    public boolean isTileSolid(TileType type, int x, int y) {
-        if (type.ladder) {
-            return this.y > y && !Gdx.input.isKeyPressed(Input.Keys.DOWN);
+    public boolean isTileSolid(Tile tile) {
+        if (tile.type.ladder) {
+            return this.y > tile.y + 1 && !Gdx.input.isKeyPressed(Input.Keys.DOWN);
         } else {
-            return type.solid;
+            return super.isTileSolid(tile);
         }
     }
 }

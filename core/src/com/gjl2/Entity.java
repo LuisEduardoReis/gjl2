@@ -14,7 +14,7 @@ public class Entity {
     public float vy = 0;
     public float px = 0;
     public float py = 0;
-    public boolean hasGravity = true;
+    public boolean hasGravity = false;
     public float radius = 0.25f;
     public boolean collidesWithLevel = false;
 
@@ -34,6 +34,8 @@ public class Entity {
         this.y += this.vy * delta;
     }
 
+    void collide(Entity other) {}
+
     public void renderSprites(SpriteBatch spriteBatch) {
 
     }
@@ -42,7 +44,11 @@ public class Entity {
 
     }
 
-    public boolean isTileSolid(TileType type, int x, int y) {
-        return type.solid;
+    public boolean isTileSolid(Tile tile) {
+        if (tile.door != null) {
+            return !tile.door.open;
+        } else {
+            return tile.type.solid;
+        }
     }
 }

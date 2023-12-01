@@ -33,37 +33,51 @@ public class Level {
         this.height = (int) map.getProperties().get("height");
 
         this.tiles = new Tile[this.width * this.height];
+        this.overlayTiles = new Tile[this.width * this.height];
         for (int i = 0; i < this.width * this.height; i++) {
             this.tiles[i] = new Tile(getTileType("wall"));
+            this.overlayTiles[i] = new Tile(null);
         }
         this.boundaryTile = new Tile(getTileType("wall"));
 
-        //Init overlay matrix to nil
-        this.overlayTiles = new Tile[this.width * this.height];
-        for (int i = 0; i < this.width * this.height; i++) {
-            this.overlayTiles[i] = new Tile(null);
-        }
-
-        //Load positions of items in the overlay
-        TiledMapTileLayer overlayTiles = (TiledMapTileLayer) map.getLayers().get("tiles_overlay");
-
-
         TiledMapTileLayer mapTiles = (TiledMapTileLayer) map.getLayers().get("tiles");
+        TiledMapTileLayer overlayTiles = (TiledMapTileLayer) map.getLayers().get("tiles_overlay");
         MapObjects mapObjects = map.getLayers().get("objects").getObjects();
 
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 TiledMapTileLayer.Cell cell = mapTiles.getCell(x, y);
+                getTile(x,y).x = x;
+                getTile(x,y).y = y;
                 getTile(x, y).type = getTileTypeById(cell.getTile().getId() - 1);
 
                 TiledMapTileLayer.Cell cellOverlay = overlayTiles.getCell(x, y);
+                getTileOverlay(x, y).x = x;
+                getTileOverlay(x, y).y = y;
                 if (cellOverlay != null) getTileOverlay(x, y).type = getTileTypeById(cellOverlay.getTile().getId() - 1);
             }
         }
 
-        MapObject spawn = mapObjects.get("spawn");
         this.player = new Player();
-        addEntity(this.player, (Float) spawn.getProperties().get("x") / 16, (Float) spawn.getProperties().get("y") / 16);
+        addEntity(this.player, 0,0);
+
+        if (mapObjects != null) setupMapObjects(mapObjects);
+    }
+
+    private void setupMapObjects(MapObjects mapObjects) {
+        for (MapObject mapObject : mapObjects) {
+            String type = (String) mapObject.getProperties().get("type");
+
+            if ("spawn".equals(type)) {
+                this.player.x = (Float) mapObject.getProperties().get("x") / Main.TILE_SIZE;
+                this.player.y = (Float) mapObject.getProperties().get("y") / Main.TILE_SIZE;
+            } else
+            if ("door".equals(type)) {
+                Door door = new Door();
+                addEntity(door, (Float) mapObject.getProperties().get("x") / Main.TILE_SIZE, (Float) mapObject.getProperties().get("y") / Main.TILE_SIZE);
+                getTile(door.x, door.y).door = door;
+            }
+        }
     }
 
     private void addEntity(Entity entity, float x, float y) {
@@ -80,7 +94,22 @@ public class Level {
         for (Entity entity : this.entities) {
             entity.update(delta);
         }
+
+        handleEntityCollisions();
         handleCollisions();
+    }
+
+    private void handleEntityCollisions() {
+        for (Entity e : entities) {
+            for (Entity o : entities) {
+                if (e == o) continue;
+                float dist = Util.pointDistance(e.x, e.y, o.x, o.y);
+                if (dist < (e.radius + o.radius)) {
+                    e.collide(o);
+                }
+            }
+
+        }
     }
 
     private void handleCollisions() {
@@ -97,24 +126,23 @@ public class Level {
                 entity.y = entity.py;
             }
 
-            if (getTile(xc - 1, yc).type.solid && xr < entity.radius) {
+            if (entity.isTileSolid(getTile(xc - 1, yc)) && xr < entity.radius) {
                 xr = entity.radius;
                 entity.vx = 0;
                 entity.x = xc + xr;
             }
-            if (getTile(xc + 1, yc).type.solid && xr > 1 - entity.radius) {
+            if (entity.isTileSolid(getTile(xc + 1, yc)) && xr > 1 - entity.radius) {
                 xr = 1 - entity.radius;
                 entity.vx = 0;
                 entity.x = xc + xr;
             }
 
-            Tile tileBelow = getTile(xc, yc - 1);
-            if (entity.isTileSolid(tileBelow.type, xc, yc - 1) && yr < entity.radius) {
+            if (entity.isTileSolid(getTile(xc, yc - 1)) && yr < entity.radius) {
                 yr = entity.radius;
                 entity.vy = 0;
                 entity.y = yc + yr;
             }
-            if (getTile(xc, yc + 1).type.solid && yr > 1 - entity.radius) {
+            if (entity.isTileSolid(getTile(xc, yc + 1)) && yr > 1 - entity.radius) {
                 yr = 1 - entity.radius;
                 entity.vy = 0;
                 entity.y = yc + yr;
@@ -123,10 +151,6 @@ public class Level {
     }
 
     public void renderSprites(SpriteBatch spriteBatch) {
-        for (Entity entity : this.entities) {
-            entity.renderSprites(spriteBatch);
-        }
-
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 Tile tile = this.getTile(x, y);
@@ -135,6 +159,10 @@ public class Level {
                 Tile overlayTile = this.getTileOverlay(x, y);
                 if (overlayTile.type != null) spriteBatch.draw(Assets.getTileTextureById(overlayTile.type.id), x, y, 1, 1);
             }
+        }
+
+        for (Entity entity : this.entities) {
+            entity.renderSprites(spriteBatch);
         }
     }
 
