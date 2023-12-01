@@ -1,6 +1,8 @@
 package com.gjl2;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import static com.gjl2.Main.TILE_SIZE;
@@ -15,8 +17,10 @@ public class Assets {
     static TextureRegion[][] spriteTextures;
 
     public static TextureRegion doorSprite;
+    public static BitmapFont font;
 
     public static void createAssets() {
+        font = new BitmapFont(Gdx.files.internal("font.fnt"));
         testTexture = new Texture("badlogic.jpg");
         tilesheet = new Texture("tilesheet.png");
         spritesheet = new Texture("spritesheet.png");

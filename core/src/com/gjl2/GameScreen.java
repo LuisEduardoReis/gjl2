@@ -1,13 +1,14 @@
 package com.gjl2;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 public class GameScreen extends ScreenAdapter {
 
     SpriteBatch spriteBatch;
@@ -48,6 +49,14 @@ public class GameScreen extends ScreenAdapter {
         this.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         this.level.renderShapes(this.shapeRenderer);
         this.shapeRenderer.end();
+
+        BitmapFont font = Assets.font;
+        font.setColor(Color.WHITE);
+        font.getData().setScale(1f);
+        this.spriteBatch.begin();
+        Util.drawTextCentered(spriteBatch, font, "Hello world", level.player.x, level.player.y);
+        this.spriteBatch.end();
+
     }
 
     @Override

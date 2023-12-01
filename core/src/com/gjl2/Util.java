@@ -1,4 +1,7 @@
 package com.gjl2;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Util {
 
@@ -12,5 +15,11 @@ public class Util {
         float x = x2 - x1;
         float y = y2 - y1;
         return (float) Math.sqrt((x * x) + (y * y));
+    }
+
+    static GlyphLayout layout = new GlyphLayout();
+    public static void drawTextCentered(SpriteBatch batch, BitmapFont font, String text, float x, float y) {
+        layout.setText(font, text);
+        font.draw(batch, text, x - layout.width/2, y + layout.height/2);
     }
 }
