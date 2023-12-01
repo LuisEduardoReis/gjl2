@@ -51,11 +51,16 @@ public class GameScreen extends ScreenAdapter {
         this.level.renderShapes(this.shapeRenderer);
         this.shapeRenderer.end();
 
+
+        this.camera.position.set(Main.WIDTH/2f,Main.HEIGHT/2f,0);
+        this.camera.zoom = 1;
+        this.camera.update();
+        this.spriteBatch.setProjectionMatrix(camera.combined);
         BitmapFont font = Assets.font;
         font.setColor(Color.WHITE);
         font.getData().setScale(1f);
         this.spriteBatch.begin();
-        Util.drawTextCentered(spriteBatch, font, "Hello world", level.player.x, level.player.y);
+        Util.drawTextCentered(spriteBatch, font, "Hello world", Main.WIDTH - 100,20);
         this.spriteBatch.end();
 
     }
