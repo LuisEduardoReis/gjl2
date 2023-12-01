@@ -30,6 +30,8 @@ public class Level {
 
     ShipState shipState;
 
+    public boolean gameOver;
+
     Level(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
 
@@ -122,6 +124,10 @@ public class Level {
 
         if (this.entities.stream().anyMatch(e -> e.remove)) {
             this.entities = this.entities.stream().filter(e -> !e.remove).collect(Collectors.toList());
+        }
+
+        if (this.shipState.hullStatus == 0 || this.shipState.oxygenLevel == 0) {
+            gameOver = true;
         }
     }
 

@@ -6,7 +6,6 @@ public class ShipState {
     public final Level level;
     public float oxygenLevel = 100;
     public int shieldHits = 0;
-
     public int hullStatus = 100;
 
     ShipState(Level level) {

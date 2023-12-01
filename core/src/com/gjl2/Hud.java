@@ -60,6 +60,12 @@ public class Hud {
             shapeRenderer.setColor(0.5f, 0, 0, 0.5f * (float) Math.abs(Math.sin(4 * this.time)));
             shapeRenderer.rect(0,0,Main.WIDTH,Main.HEIGHT);
         }
+
+        if (this.gameScreen.level.gameOver) {
+            shapeRenderer.setColor(0.5f, 0, 0, 1);
+            shapeRenderer.rect(0,0,Main.WIDTH,Main.HEIGHT);
+        }
+
     }
 
     public void renderText(SpriteBatch spriteBatch) {
@@ -90,5 +96,9 @@ public class Hud {
             font.setColor(1,1,1, warningMessage.time < WARNING_DURATION - fadeDelay ? 1f : (MESSAGE_DURATION - warningMessage.time) / fadeDelay);
             Util.drawTextCentered(spriteBatch, font, warningMessage.message, Main.WIDTH / 2f, Main.HEIGHT * 3f/4);
         }
+        if (level.gameOver) {
+            addWarning("GAME OVER");
+        }
+
     }
 }
