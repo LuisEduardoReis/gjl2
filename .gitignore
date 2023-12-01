@@ -112,3 +112,8 @@ Thumbs.db
 /ios/xcode/native/
 /ios/IOSLauncher.app
 /ios/IOSLauncher.app.dSYM
+
+assets/tileset.tiled-project
+assets/tileset.tiled-session
+
+assets/*pxo

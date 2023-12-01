@@ -12,6 +12,7 @@ public class TileType {
         createTileType(0, "wall", new TileType(true, false));
         createTileType(1, "room", new TileType(false, false));
         createTileType(2, "ladder", new TileType(false, false));
+        createTileType(3, "shield_overlay", new TileType(false, false));
     }
 
     public static TileType createTileType(int id, String name, TileType type) {

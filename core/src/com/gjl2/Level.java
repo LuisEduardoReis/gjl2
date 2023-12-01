@@ -22,6 +22,7 @@ public class Level {
 
     public int width, height;
     Tile[] tiles;
+    Tile[] overlayTiles;
     Tile boundaryTile;
 
     Level() {
@@ -37,19 +38,33 @@ public class Level {
         }
         this.boundaryTile = new Tile(getTileType("wall"));
 
+        //Init overlay matrix to nil
+        this.overlayTiles = new Tile[this.width * this.height];
+        for (int i = 0; i < this.width * this.height; i++) {
+            this.overlayTiles[i] = new Tile(null);
+        }
+
+        //Load positions of items in the overlay
+        TiledMapTileLayer overlayTiles = (TiledMapTileLayer) map.getLayers().get("tiles_overlay");
+
+
         TiledMapTileLayer mapTiles = (TiledMapTileLayer) map.getLayers().get("tiles");
         MapObjects mapObjects = map.getLayers().get("objects").getObjects();
 
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 TiledMapTileLayer.Cell cell = mapTiles.getCell(x, y);
-                getTile(x,y).type = getTileTypeById(cell.getTile().getId() - 1);
+                getTile(x, y).type = getTileTypeById(cell.getTile().getId() - 1);
+
+                TiledMapTileLayer.Cell cellOverlay = overlayTiles.getCell(x, y);
+                if (cellOverlay != null) getTileOverlay(x, y).type = getTileTypeById(cellOverlay.getTile().getId() - 1);
             }
+
         }
 
         MapObject spawn = mapObjects.get("spawn");
         this.player = new Player();
-        addEntity(this.player, (Float) spawn.getProperties().get("x") / 16, (Float) spawn.getProperties().get("y")  / 16);
+        addEntity(this.player, (Float) spawn.getProperties().get("x") / 16, (Float) spawn.getProperties().get("y") / 16);
     }
 
     private void addEntity(Entity entity, float x, float y) {
@@ -114,8 +129,11 @@ public class Level {
 
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
-                Tile tile = this.getTile(x,y);
-                spriteBatch.draw(Assets.getTileTextureById(tile.type.id), x,y,1,1);
+                Tile tile = this.getTile(x, y);
+                spriteBatch.draw(Assets.getTileTextureById(tile.type.id), x, y, 1, 1);
+
+                Tile overlayTile = this.getTileOverlay(x, y);
+                if (overlayTile.type != null) spriteBatch.draw(Assets.getTileTextureById(overlayTile.type.id), x, y, 1, 1);
             }
         }
     }
@@ -137,5 +155,10 @@ public class Level {
     private Tile getTile(int x, int y) {
         if (x < 0 || x >= this.width || y < 0 || y >= this.height) return this.boundaryTile;
         return this.tiles[y * this.width + x];
+    }
+
+    private Tile getTileOverlay(int x, int y) {
+        if (x < 0 || x >= this.width || y < 0 || y >= this.height) return this.boundaryTile;
+        return this.overlayTiles[y * this.width + x];
     }
 }
