@@ -16,7 +16,7 @@ import static com.gjl2.TileType.*;
 
 public class Level {
 
-
+    GameScreen gameScreen;
     Player player;
     List<Entity> entities;
 
@@ -29,7 +29,8 @@ public class Level {
 
     public float O2Level;
 
-    Level() {
+    Level(GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
         this.gameEvents = new GameEvents(this);
         this.entities = new LinkedList<>();
 
@@ -68,7 +69,7 @@ public class Level {
 
         if (mapObjects != null) setupMapObjects(mapObjects);
 
-        O2Level = 80;
+        O2Level = 100;
     }
 
     private void setupMapObjects(MapObjects mapObjects) {
