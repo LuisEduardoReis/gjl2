@@ -2,6 +2,7 @@ package com.gjl2;
 
 public class ShipState {
 
+    public static final int MAX_SHIELD_HITS = 3;
     public final Level level;
     public float oxygenLevel = 100;
     public int shieldHits = 3;

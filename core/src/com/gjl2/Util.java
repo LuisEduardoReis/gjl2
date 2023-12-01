@@ -47,4 +47,8 @@ public class Util {
     public static boolean isBetween(int x, int lower, int upper) {
         return lower <= x && x <= upper;
     }
+
+    public static float clamp(float val, float min, float max) {
+        return Math.max(min, Math.min(max, val));
+    }
 }
