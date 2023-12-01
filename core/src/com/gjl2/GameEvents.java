@@ -16,7 +16,7 @@ public class GameEvents {
     float timeToEvent;
     public GameEvents(Level level) {
         this.level = level;
-        timeToEvent = Util.randomRange(10, 15);
+        timeToEvent = 0;
 
         events.add(this::eventAsteroidHit);
     }
@@ -25,7 +25,7 @@ public class GameEvents {
         timeToEvent = Util.stepTo(timeToEvent, 0, 1*delta);
         if (timeToEvent == 0) {
             rollEvent();
-            timeToEvent =  Util.randomRange(10, 15);
+            timeToEvent =  Util.randomRange(30, 45);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) this.rollEvent();

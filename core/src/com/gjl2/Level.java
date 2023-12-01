@@ -105,6 +105,7 @@ public class Level {
         entity.level = this;
     }
 
+
     public void update(float delta) {
         for (Entity entity : this.entities) {
             entity.preupdate(delta);

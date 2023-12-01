@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Affine2;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class Hud {
 
     public void renderShapes(ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(0,0,0, 0.5f);
-        shapeRenderer.rect(0,0, 730, 225);
+        shapeRenderer.rect(0,0, 500, 250);
 
         if (this.gameScreen.level.shipState.isAlarmOn()) {
             shapeRenderer.setColor(0.5f, 0, 0, 0.5f * (float) Math.abs(Math.sin(4 * this.time)));
@@ -65,12 +66,14 @@ public class Hud {
         BitmapFont font = Assets.font;
         Level level = this.gameScreen.level;
         font.setColor(Color.GREEN);
-        font.getData().setScale(2f);
-        Util.drawTextCentered(spriteBatch, font, String.format("Hull status 100/100\nOxygen level %d%%\nShield level %d", (int) level.shipState.oxygenLevel, level.shipState.shieldHits),  365,100);
+        font.getData().setScale(1.5f);
+        font.draw(spriteBatch, "Hull status 100%", 25, 210);
+        font.draw(spriteBatch, String.format("Oxygen level %d%%", (int) level.shipState.oxygenLevel), 25, 140);
+        font.draw(spriteBatch, String.format("Shield level %d", level.shipState.shieldHits), 25, 70);
 
         font.setColor(Color.WHITE);
+        Assets.font.getData().setScale(1.5f);
         for (int i = 0; i < messages.size() && i < 10; i++) {
-            Assets.font.getData().setScale(1.5f);
             HudMessage hudMessage = messages.get(messages.size() - 1 - i);
             if (hudMessage.time > MESSAGE_DURATION) break;
             Util.drawTextAlignRight(spriteBatch, font, hudMessage.message, Main.WIDTH - 20, 50 + 50 * i);
