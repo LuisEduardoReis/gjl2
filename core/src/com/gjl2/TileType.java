@@ -12,6 +12,7 @@ public class TileType {
         for (int i = 0; i < 255; i++) {
             createTileType(i, new TileType(true));
         }
+        getTileTypeBySheetPosition(0,0).setSolid(false).setName("empty");
         getTileTypeBySheetPosition(1,0).setSolid(false).setName("room");
         getTileTypeBySheetPosition(2,0).setSolid(false).setLadder(true).setName("ladder");
         getTileTypeBySheetPosition(0,1).setSolid(false).setName("door_frame");

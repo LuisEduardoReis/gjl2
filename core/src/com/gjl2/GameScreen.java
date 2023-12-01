@@ -56,6 +56,12 @@ public class GameScreen extends ScreenAdapter {
         this.level.renderShapes(this.shapeRenderer);
         this.shapeRenderer.end();
 
+        if (Main.DEBUG) {
+            this.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+            this.level.renderDebug(shapeRenderer);
+            this.shapeRenderer.end();
+        }
+
         this.camera.position.set(Main.WIDTH/2f,Main.HEIGHT/2f,0);
         this.camera.zoom = 1;
         this.camera.update();

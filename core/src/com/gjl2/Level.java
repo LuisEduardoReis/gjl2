@@ -91,9 +91,6 @@ public class Level {
             } else
             if ("oxygen-room".equals(type)) {
                 addEntity(new OxygenRoom(), ox, oy);
-            } else
-            if ("toolbox".equals(type)) {
-                addEntity(new Toolbox(), ox, oy);
             }
         }
     }
@@ -131,6 +128,12 @@ public class Level {
                 float dist = Util.pointDistance(e.x, e.y, o.x, o.y);
                 if (dist < (e.radius + o.radius)) {
                     e.collide(o, delta);
+                    if (e.collidesWithOthers && o.collidesWithOthers) {
+                        float dx = (e.x - o.x) / dist;
+                        float dy = (e.y - o.y) / dist;
+                        o.x -= dx * (e.radius + o.radius - dist) * 0.5f;
+                        o.y -= dy * (e.radius + o.radius - dist) * 0.5f;
+                    }
                 }
             }
         }
@@ -204,6 +207,12 @@ public class Level {
 
         for (Entity entity : this.entities) {
             entity.renderShapes(shapeRenderer);
+        }
+    }
+
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        for (Entity entity : this.entities) {
+            entity.renderDebug(shapeRenderer);
         }
     }
 

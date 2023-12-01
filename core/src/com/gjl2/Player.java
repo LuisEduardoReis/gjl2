@@ -21,6 +21,7 @@ public class Player extends Entity {
         this.radius = 0.4f;
         this.hasGravity = true;
         this.collidesWithLevel = true;
+        this.collidesWithOthers = true;
     }
 
     @Override
@@ -70,7 +71,6 @@ public class Player extends Entity {
             } else if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 ((Interactable) other).interactHold(this, delta);
             }
-
         }
     }
 

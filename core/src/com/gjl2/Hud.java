@@ -22,6 +22,7 @@ public class Hud {
         }
     }
 
+    private float time = 0;
     private final GameScreen gameScreen;
     private HudMessage warningMessage = null;
     private final List<HudMessage> messages = new LinkedList<>();
@@ -31,6 +32,8 @@ public class Hud {
     }
 
     public void update(float delta) {
+        this.time += delta;
+
         for (HudMessage message : this.messages) {
             message.time += delta;
         }
@@ -51,6 +54,11 @@ public class Hud {
     public void renderShapes(ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(0,0,0, 0.5f);
         shapeRenderer.rect(0,0, 730, 225);
+
+        if (this.gameScreen.level.shipState.isAlarmOn()) {
+            shapeRenderer.setColor(0.5f, 0, 0, 0.5f * (float) Math.abs(Math.sin(4 * this.time)));
+            shapeRenderer.rect(0,0,Main.WIDTH,Main.HEIGHT);
+        }
     }
 
     public void renderText(SpriteBatch spriteBatch) {
@@ -65,7 +73,7 @@ public class Hud {
             Assets.font.getData().setScale(1.5f);
             HudMessage hudMessage = messages.get(messages.size() - 1 - i);
             if (hudMessage.time > MESSAGE_DURATION) break;
-            Util.drawTextAlignRight(spriteBatch, font, hudMessage.message, Main.WIDTH - 20, 40 + 50 * i);
+            Util.drawTextAlignRight(spriteBatch, font, hudMessage.message, Main.WIDTH - 20, 50 + 50 * i);
         }
 
         if (this.warningMessage != null && this.warningMessage.time < MESSAGE_DURATION) {

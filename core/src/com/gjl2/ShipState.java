@@ -11,10 +11,20 @@ public class ShipState {
     }
 
     public void update(float delta) {
-        boolean hasAsteroidHits = this.level.entities.stream().anyMatch(entity -> entity instanceof AsteroidHit);
-
-        if (hasAsteroidHits) {
+        if (hasAsteroidHits()) {
             oxygenLevel = Util.stepTo(oxygenLevel, 0, delta * 100 / 150);
         }
+    }
+
+    public boolean hasAsteroidHits() {
+        return this.level.entities.stream().anyMatch(e -> e instanceof AsteroidHit);
+    }
+
+    public boolean isOxygenCritical() {
+        return this.oxygenLevel < 0.3;
+    }
+
+    public boolean isAlarmOn() {
+        return this.hasAsteroidHits() || isOxygenCritical();
     }
 }

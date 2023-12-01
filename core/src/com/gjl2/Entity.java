@@ -1,5 +1,6 @@
 package com.gjl2;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -18,6 +19,7 @@ public class Entity {
     public boolean hasGravity = false;
     public float radius = 0.25f;
     public boolean collidesWithLevel = false;
+    public boolean collidesWithOthers = false;
     public boolean remove = false;
 
     Entity() {
@@ -43,7 +45,11 @@ public class Entity {
     }
 
     public void renderShapes(ShapeRenderer shapeRenderer) {
+    }
 
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.setColor(Color.RED);
+        shapeRenderer.circle(this.x, this.y, this.radius, 24);
     }
 
     public boolean isTileSolid(Tile tile) {
