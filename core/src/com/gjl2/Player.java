@@ -35,7 +35,7 @@ public class Player extends Entity {
     }
 
     @Override
-    void collide(Entity other) {
+    void collide(Entity other, float delta) {
         if (other instanceof Interactable && Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             ((Interactable) other).interact(this);
         }

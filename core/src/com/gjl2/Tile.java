@@ -6,6 +6,8 @@ public class Tile {
     TileType type;
     Door door;
 
+    OxygenRoom oxygenRoom;
+
     Tile(TileType type) {
         this.type = type;
         this.door = null;

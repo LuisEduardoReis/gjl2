@@ -34,7 +34,7 @@ public class Entity {
         this.y += this.vy * delta;
     }
 
-    void collide(Entity other) {}
+    void collide(Entity other,float delta) {}
 
     public void renderSprites(SpriteBatch spriteBatch) {
 

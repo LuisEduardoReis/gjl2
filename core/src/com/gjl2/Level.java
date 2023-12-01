@@ -25,6 +25,8 @@ public class Level {
     Tile[] overlayTiles;
     Tile boundaryTile;
 
+    public float O2Level;
+
     Level() {
         this.entities = new LinkedList<>();
 
@@ -62,6 +64,8 @@ public class Level {
         addEntity(this.player, 0,0);
 
         if (mapObjects != null) setupMapObjects(mapObjects);
+
+        O2Level = 80;
     }
 
     private void setupMapObjects(MapObjects mapObjects) {
@@ -76,6 +80,11 @@ public class Level {
                 Door door = new Door();
                 addEntity(door, (Float) mapObject.getProperties().get("x") / Main.TILE_SIZE, (Float) mapObject.getProperties().get("y") / Main.TILE_SIZE);
                 getTile(door.x, door.y).door = door;
+            } else
+            if ("oxygen-room".equals(type)) {
+                OxygenRoom oxygenRoom = new OxygenRoom();
+                addEntity(oxygenRoom, (Float) mapObject.getProperties().get("x") / Main.TILE_SIZE, (Float) mapObject.getProperties().get("y") / Main.TILE_SIZE);
+                getTile(oxygenRoom.x, oxygenRoom.y).oxygenRoom = oxygenRoom;
             }
         }
     }
@@ -95,17 +104,17 @@ public class Level {
             entity.update(delta);
         }
 
-        handleEntityCollisions();
+        handleEntityCollisions(delta);
         handleLevelCollisions();
     }
 
-    private void handleEntityCollisions() {
+    private void handleEntityCollisions(float delta) {
         for (Entity e : entities) {
             for (Entity o : entities) {
                 if (e == o) continue;
                 float dist = Util.pointDistance(e.x, e.y, o.x, o.y);
                 if (dist < (e.radius + o.radius)) {
-                    e.collide(o);
+                    e.collide(o, delta);
                 }
             }
         }

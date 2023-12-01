@@ -60,7 +60,7 @@ public class GameScreen extends ScreenAdapter {
         font.setColor(Color.GREEN);
         font.getData().setScale(2f);
         this.spriteBatch.begin();
-        Util.drawTextCentered(spriteBatch, font, "Hull status 100/100\nOxygen level 100%\nShield level 3", 365,100);
+        Util.drawTextCentered(spriteBatch, font, String.format("Hull status 100/100\nOxygen level %f\nShield level 3", level.O2Level), 365,100);
         this.spriteBatch.end();
 
     }
