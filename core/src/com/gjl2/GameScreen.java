@@ -57,10 +57,10 @@ public class GameScreen extends ScreenAdapter {
         this.camera.update();
         this.spriteBatch.setProjectionMatrix(camera.combined);
         BitmapFont font = Assets.font;
-        font.setColor(Color.WHITE);
-        font.getData().setScale(1f);
+        font.setColor(Color.GREEN);
+        font.getData().setScale(2f);
         this.spriteBatch.begin();
-        Util.drawTextCentered(spriteBatch, font, "Hello world", Main.WIDTH - 100,20);
+        Util.drawTextCentered(spriteBatch, font, "Hull status 100/100\nOxygen level 100%\nShield level 3", 365,100);
         this.spriteBatch.end();
 
     }

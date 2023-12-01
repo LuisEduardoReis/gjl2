@@ -22,4 +22,5 @@ public class Util {
         layout.setText(font, text);
         font.draw(batch, text, x - layout.width/2, y + layout.height/2);
     }
+
 }
