@@ -25,9 +25,12 @@ public class Level {
     Tile[] overlayTiles;
     Tile boundaryTile;
 
+    GameEvents gameEvents;
+
     public float O2Level;
 
     Level() {
+        this.gameEvents = new GameEvents(this);
         this.entities = new LinkedList<>();
 
         TiledMap map = new TmxMapLoader(new InternalFileHandleResolver()).load("level.tmx");
@@ -103,6 +106,8 @@ public class Level {
         for (Entity entity : this.entities) {
             entity.update(delta);
         }
+
+        this.gameEvents.update(delta);
 
         handleEntityCollisions(delta);
         handleLevelCollisions();

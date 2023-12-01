@@ -34,4 +34,8 @@ public class Util {
         Gdx.gl.glEnable(GL32.GL_BLEND);
         Gdx.gl.glBlendFunc(GL32.GL_SRC_ALPHA, GL32.GL_ONE_MINUS_SRC_ALPHA);
     }
+
+    public static float randomRange(float a, float b){
+        return (float) (a + Math.random() * (b - a));
+    }
 }
