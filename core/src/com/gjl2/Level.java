@@ -77,19 +77,23 @@ public class Level {
         for (MapObject mapObject : mapObjects) {
             String type = (String) mapObject.getProperties().get("type");
 
+            float ox = (Float) mapObject.getProperties().get("x") / Main.TILE_SIZE;
+            float oy = (Float) mapObject.getProperties().get("y") / Main.TILE_SIZE;
+
             if ("spawn".equals(type)) {
-                this.player.x = (Float) mapObject.getProperties().get("x") / Main.TILE_SIZE;
-                this.player.y = (Float) mapObject.getProperties().get("y") / Main.TILE_SIZE;
+                this.player.x = ox;
+                this.player.y = oy;
             } else
             if ("door".equals(type)) {
                 Door door = new Door();
-                addEntity(door, (Float) mapObject.getProperties().get("x") / Main.TILE_SIZE, (Float) mapObject.getProperties().get("y") / Main.TILE_SIZE);
+                addEntity(door, ox, oy);
                 getTile(door.x, door.y).door = door;
             } else
             if ("oxygen-room".equals(type)) {
-                OxygenRoom oxygenRoom = new OxygenRoom();
-                addEntity(oxygenRoom, (Float) mapObject.getProperties().get("x") / Main.TILE_SIZE, (Float) mapObject.getProperties().get("y") / Main.TILE_SIZE);
-                getTile(oxygenRoom.x, oxygenRoom.y).oxygenRoom = oxygenRoom;
+                addEntity(new OxygenRoom(), ox, oy);
+            } else
+            if ("toolbox".equals(type)) {
+                addEntity(new Toolbox(), ox, oy);
             }
         }
     }
