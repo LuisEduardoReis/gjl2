@@ -14,7 +14,7 @@ public class Entity {
     public float vy = 0;
     public float px = 0;
     public float py = 0;
-    public float gravity = GRAVITY;
+    public boolean hasGravity = true;
     public float radius = 0.25f;
     public boolean collidesWithLevel = false;
 
@@ -27,8 +27,8 @@ public class Entity {
     }
 
     void update(float delta) {
-        if (this.gravity > 0) {
-            this.vy -= this.gravity * delta;
+        if (this.hasGravity) {
+            this.vy -= GRAVITY * delta;
         }
         this.x += this.vx * delta;
         this.y += this.vy * delta;
@@ -40,5 +40,9 @@ public class Entity {
 
     public void renderShapes(ShapeRenderer shapeRenderer) {
 
+    }
+
+    public boolean isTileSolid(TileType type, int x, int y) {
+        return type.solid;
     }
 }

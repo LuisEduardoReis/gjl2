@@ -59,7 +59,6 @@ public class Level {
                 TiledMapTileLayer.Cell cellOverlay = overlayTiles.getCell(x, y);
                 if (cellOverlay != null) getTileOverlay(x, y).type = getTileTypeById(cellOverlay.getTile().getId() - 1);
             }
-
         }
 
         MapObject spawn = mapObjects.get("spawn");
@@ -109,7 +108,8 @@ public class Level {
                 entity.x = xc + xr;
             }
 
-            if (getTile(xc, yc - 1).type.solid && yr < entity.radius) {
+            Tile tileBelow = getTile(xc, yc - 1);
+            if (entity.isTileSolid(tileBelow.type, xc, yc - 1) && yr < entity.radius) {
                 yr = entity.radius;
                 entity.vy = 0;
                 entity.y = yc + yr;
@@ -152,12 +152,16 @@ public class Level {
         }
     }
 
-    private Tile getTile(int x, int y) {
+    public Tile getTile(int x, int y) {
         if (x < 0 || x >= this.width || y < 0 || y >= this.height) return this.boundaryTile;
         return this.tiles[y * this.width + x];
     }
 
-    private Tile getTileOverlay(int x, int y) {
+    public Tile getTile(float x, float y) {
+        return getTile((int) Math.floor(x), (int) Math.floor(y));
+    }
+
+    public Tile getTileOverlay(int x, int y) {
         if (x < 0 || x >= this.width || y < 0 || y >= this.height) return this.boundaryTile;
         return this.overlayTiles[y * this.width + x];
     }
