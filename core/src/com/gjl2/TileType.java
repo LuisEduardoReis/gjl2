@@ -12,15 +12,14 @@ public class TileType {
         for (int i = 0; i < 255; i++) {
             createTileType(i, new TileType(true));
         }
-        getTileTypeByPosition(1,0).setSolid(false);
-        getTileTypeByPosition(2,0).setSolid(false).setLadder(true);
-        getTileTypeByPosition(0,1).setSolid(false);
+        getTileTypeBySheetPosition(1,0).setSolid(false);
+        getTileTypeBySheetPosition(2,0).setSolid(false).setLadder(true);
+        getTileTypeBySheetPosition(0,1).setSolid(false);
     }
 
-    public static TileType createTileType(int id, TileType type) {
+    public static void createTileType(int id, TileType type) {
         TILETYPES_BY_ID.put(id, type);
         type.id = id;
-        return type;
     }
     public static TileType getTileType(String name) {
         if (TILETYPES.containsKey(name)) {
@@ -36,7 +35,7 @@ public class TileType {
             return TILETYPES_BY_ID.get(255);
         }
     }
-    public static TileType getTileTypeByPosition(int x, int y) {
+    public static TileType getTileTypeBySheetPosition(int x, int y) {
         if (TILETYPES_BY_ID.containsKey(y * 16 + x)) {
             return TILETYPES_BY_ID.get(y * 16 + x);
         } else {
@@ -47,7 +46,6 @@ public class TileType {
     public boolean solid;
     public boolean ladder;
     public int id;
-    public String name;
 
     TileType(boolean solid) {
         this.solid = solid;
