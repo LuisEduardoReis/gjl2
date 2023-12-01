@@ -34,7 +34,7 @@ public class Level {
         this.gameEvents = new GameEvents(this);
         this.entities = new LinkedList<>();
 
-        TiledMap map = new TmxMapLoader(new InternalFileHandleResolver()).load("level.tmx");
+        TiledMap map = new TmxMapLoader(new InternalFileHandleResolver()).load("level3.tmx");
         this.width = (int) map.getProperties().get("width");
         this.height = (int) map.getProperties().get("height");
 
