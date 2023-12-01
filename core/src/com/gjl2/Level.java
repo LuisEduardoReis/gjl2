@@ -92,9 +92,6 @@ public class Level {
             if ("oxygen-room".equals(type)) {
                 addEntity(new OxygenRoom(), ox, oy);
             } else
-            if ("toolbox".equals(type)) {
-                addEntity(new Toolbox(), ox, oy);
-            }else
             if ("shields-room".equals(type)) {
                 addEntity(new ShieldRoom(), ox, oy);
             }
