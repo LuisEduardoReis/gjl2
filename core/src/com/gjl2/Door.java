@@ -5,16 +5,23 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Door extends Entity implements Interactable {
 
     boolean open = false;
+    float openState = 0;
 
     public Door() {
         this.radius = 0.75f;
     }
 
     @Override
+    void update(float delta) {
+        float distToPlayer = Util.pointDistance(this.x, this.y, this.level.player.x, this.level.player.y);
+        if (distToPlayer > 3) this.open = false;
+
+        this.openState = Util.stepTo(this.openState, this.open ? 1 : 0, 2 * delta);
+    }
+
+    @Override
     public void renderSprites(SpriteBatch spriteBatch) {
-        if (!this.open) {
-            spriteBatch.draw(Assets.doorSprite, (int) Math.floor(this.x), (int) Math.floor(this.y), 1,1);
-        }
+        spriteBatch.draw(Assets.doorSprite, (int) Math.floor(this.x), (int) Math.floor(this.y) + this.openState, 1,1);
     }
 
     @Override
