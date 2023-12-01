@@ -75,6 +75,7 @@ public class GameEvents {
 
                 this.level.gameScreen.hud.addWarning("Asteroid hit!");
                 this.level.addEntity(new AsteroidHit(), x,y);
+                this.level.shipState.hullStatus = Math.max(0, this.level.shipState.hullStatus - 10);
                 break;
             }
         }

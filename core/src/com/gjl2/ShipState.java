@@ -7,6 +7,8 @@ public class ShipState {
     public float oxygenLevel = 100;
     public int shieldHits = 0;
 
+    public int hullStatus = 100;
+
     ShipState(Level level) {
         this.level = level;
     }

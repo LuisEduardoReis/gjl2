@@ -67,7 +67,7 @@ public class Hud {
         Level level = this.gameScreen.level;
         font.setColor(Color.GREEN);
         font.getData().setScale(1.5f);
-        font.draw(spriteBatch, "Hull status 100%", 25, 210);
+        font.draw(spriteBatch, String.format("Hull status %d%%", level.shipState.hullStatus), 25, 210);
         font.draw(spriteBatch, String.format("Oxygen level %d%%", (int) level.shipState.oxygenLevel), 25, 140);
         font.draw(spriteBatch, String.format("Shield level %d", level.shipState.shieldHits), 25, 70);
 
