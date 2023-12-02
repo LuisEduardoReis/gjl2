@@ -96,6 +96,9 @@ public class Level {
             } else
             if ("shields-room".equals(type)) {
                 addEntity(new ShieldRoom(), ox, oy);
+            } else
+            if ("navigation-room".equals(type)) {
+                addEntity(new NavigationRoom(), ox, oy);
             }
         }
     }

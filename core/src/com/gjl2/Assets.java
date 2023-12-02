@@ -27,6 +27,8 @@ public class Assets {
     public static TextureRegion asteroidHitSprite;
     public static TextureRegion arrowSprite;
     public static TextureRegion oxygenSprite;
+    public static TextureRegion navigationSprite;
+    public static TextureRegion starSprite;
 
     public static BitmapFont font;
 
@@ -49,6 +51,8 @@ public class Assets {
         asteroidHitSprite = spriteTextures[1][0];
         arrowSprite = spriteTextures[1][1];
         oxygenSprite = tileTextures[0][4];
+        navigationSprite = tileTextures[0][7];
+        starSprite = spriteTextures[1][2];
     }
 
     static TextureRegion getTileTextureById(int id) {

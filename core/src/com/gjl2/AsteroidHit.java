@@ -44,4 +44,9 @@ public class AsteroidHit extends Entity implements Interactable, PointableEntity
     public TextureRegion getIcon() {
         return Assets.asteroidHitSprite;
     }
+
+    @Override
+    public String getHoverMessage() {
+        return "Press space to fix hole";
+    }
 }

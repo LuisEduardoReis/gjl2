@@ -31,4 +31,9 @@ public class Door extends Entity implements Interactable {
             this.open = !this.open;
         }
     }
+
+    @Override
+    public String getHoverMessage() {
+        return "Press space to open";
+    }
 }

@@ -14,7 +14,7 @@ public class Hud {
     public static final float MESSAGE_DURATION = 5f;
     public static final float WARNING_DURATION = 2f;
 
-    class HudMessage {
+    static class HudMessage {
         String message;
         float time;
 
@@ -91,7 +91,6 @@ public class Hud {
             shapeRenderer.setColor(0.5f, 0, 0, 1);
             shapeRenderer.rect(0,0,Main.WIDTH,Main.HEIGHT);
         }
-
     }
 
     public void renderText(SpriteBatch spriteBatch) {
@@ -124,10 +123,16 @@ public class Hud {
             font.getData().setScale(4f);
             float fadeDelay = 0.5f;
             font.setColor(1,1,1, warningMessage.time < WARNING_DURATION - fadeDelay ? 1f : (MESSAGE_DURATION - warningMessage.time) / fadeDelay);
-            Util.drawTextCentered(spriteBatch, font, warningMessage.message, Main.WIDTH / 2f, Main.HEIGHT * 3f/4);
+            Util.drawTextCentered(spriteBatch, font, warningMessage.message, Main.WIDTH / 2f, Main.HEIGHT * 0.8f);
         }
         if (level.gameOver) {
             addWarning("GAME OVER");
+        }
+
+        if (level.player.currentInteractable != null) {
+            font.setColor(Color.WHITE);
+            font.getData().setScale(1.5f);
+            Util.drawTextCentered(spriteBatch, font, level.player.currentInteractable.getHoverMessage(), Main.WIDTH / 2f, Main.HEIGHT * 0.7f);
         }
 
     }

@@ -2,7 +2,9 @@ package com.gjl2;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class OxygenRoom extends Entity implements PointableEntity {
+public class OxygenRoom extends Entity implements PointableEntity, Interactable {
+
+    private static final float TIME_TO_REPLENISH = 5;
 
     public OxygenRoom() {
         this.radius = .75f;
@@ -14,10 +16,8 @@ public class OxygenRoom extends Entity implements PointableEntity {
     }
 
     @Override
-    void collide(Entity other, float delta) {
-        if (other instanceof Player) {
-            this.level.shipState.oxygenLevel = Util.stepTo(this.level.shipState.oxygenLevel, 100, 20*delta);
-        }
+    public void interactHold(Player player, float delta) {
+        this.level.shipState.oxygenLevel = Util.stepTo(this.level.shipState.oxygenLevel, 100, delta * 100 / TIME_TO_REPLENISH);
     }
 
     @Override
@@ -28,6 +28,11 @@ public class OxygenRoom extends Entity implements PointableEntity {
     @Override
     public boolean isActive() {
         return this.level.shipState.oxygenLevel < 90;
+    }
+
+    @Override
+    public String getHoverMessage() {
+        return "Press space to replenish oxygen";
     }
 }
 

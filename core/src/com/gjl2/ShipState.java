@@ -15,7 +15,11 @@ public class ShipState {
 
     public void update(float delta) {
         if (hasAsteroidHits()) {
+            boolean wasOxygenCritical = isOxygenCritical();
             oxygenLevel = Util.stepTo(oxygenLevel, 0, delta * 100 / TIME_TO_DEPLETE_OXYGEN);
+            if (!wasOxygenCritical && isOxygenCritical()) {
+                level.gameScreen.hud.addWarning("Oxygen level critical!");
+            }
         }
     }
 

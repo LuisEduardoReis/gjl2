@@ -18,6 +18,8 @@ public class Player extends Entity {
     float animationTimer = 0;
     int animationFrame = 0;
 
+    Interactable currentInteractable = null;
+
     Player() {
         this.radius = 0.4f;
         this.hasGravity = true;
@@ -68,12 +70,14 @@ public class Player extends Entity {
             this.animationFrame = (this.animationFrame + 1) % Assets.playerMovement.size();
         }
 
+        currentInteractable = null;
         super.update(delta);
     }
 
     @Override
     void collide(Entity other, float delta) {
         if (other instanceof Interactable) {
+            currentInteractable = (Interactable) other;
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 ((Interactable) other).interact(this);
             } else if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
