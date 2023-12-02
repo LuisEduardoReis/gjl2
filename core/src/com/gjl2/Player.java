@@ -87,6 +87,9 @@ public class Player extends Entity {
             }
         }else if (other instanceof Alien){
             health = (int) Math.max(0, health -1);
+            if (other.x < this.x) this.ex = 5;
+            if (other.x >= this.x) this.ex = -5;
+            this.ey = 3;
         }
     }
 
