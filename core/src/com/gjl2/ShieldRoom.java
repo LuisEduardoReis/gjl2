@@ -15,6 +15,9 @@ public class ShieldRoom extends Entity implements Interactable {
         if (timer.timer == 0) {
             this.level.gameScreen.hud.addMessage("Shield replenished");
             this.level.shipState.shieldHits = (int) Util.clamp(this.level.shipState.shieldHits + 1, 0, ShipState.MAX_SHIELD_HITS); //could change this to have its own timer so that shield repair does not happen immediately
+            if (this.level.shipState.shieldHits == ShipState.MAX_SHIELD_HITS) {
+                this.level.gameScreen.hud.addMessage("Shields full");
+            }
             timer.reset();
         }
     }

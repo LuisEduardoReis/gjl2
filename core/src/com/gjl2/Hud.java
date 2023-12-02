@@ -80,7 +80,7 @@ public class Hud {
     public void renderShapes(ShapeRenderer shapeRenderer) {
         Level level = this.gameScreen.level;
         shapeRenderer.setColor(0,0,0, 0.5f);
-        shapeRenderer.rect(0,0, 500, 250);
+        shapeRenderer.rect(0,0, 500, 300);
 
         if (level.shipState.isAlarmOn()) {
             shapeRenderer.setColor(0.5f, 0, 0, 0.5f * (float) Math.abs(Math.sin(4 * this.time)));
@@ -97,12 +97,20 @@ public class Hud {
         BitmapFont font = Assets.font;
         Level level = this.gameScreen.level;
         font.getData().setScale(1.5f);
+
+        font.setColor(level.shipState.lost ? Color.RED : Color.GREEN);
+        if (!level.shipState.lost || time % 1 < 0.75) {
+            font.draw(spriteBatch, String.format("Earth %.1f ly", level.shipState.distanceToEarth), 25, 280);
+        }
+
         font.setColor(Color.GREEN);
         font.draw(spriteBatch, String.format("Hull status %d%%", level.shipState.hullStatus), 25, 210);
+
         font.setColor(level.shipState.isOxygenCritical() ? Color.RED : Color.GREEN);
         if (!level.shipState.isOxygenCritical() || time % 1 < 0.75) {
             font.draw(spriteBatch, String.format("Oxygen level %d%%", (int) level.shipState.oxygenLevel), 25, 140);
         }
+
         font.setColor(level.shipState.shieldHits == 0 ? Color.RED : Color.GREEN);
         font.draw(spriteBatch, String.format("Shield level %d", level.shipState.shieldHits), 25, 70);
 
