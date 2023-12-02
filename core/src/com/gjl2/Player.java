@@ -140,8 +140,8 @@ public class Player extends Entity {
 
     @Override
     public void renderShapes(ShapeRenderer shapeRenderer) {
-        //shapeRenderer.setColor(Color.RED);
-        //shapeRenderer.circle(this.x, this.y, this.radius, 24);
+        // shapeRenderer.setColor(Color.RED);
+        // shapeRenderer.circle(this.x, this.y, this.radius, 24);
     }
 
     @Override
