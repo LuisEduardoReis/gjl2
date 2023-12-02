@@ -152,7 +152,7 @@ public class Level {
         }
 
         if (this.shipState.hullStatus == 0 || this.shipState.oxygenLevel == 0 || this.player.health == 0) {
-            gameOver = true;
+            if (!Main.DEBUG) gameOver = true;
         }
 
         for (Vector3 star : this.stars) {
