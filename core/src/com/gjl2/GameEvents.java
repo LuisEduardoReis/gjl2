@@ -14,12 +14,12 @@ public class GameEvents {
     List<Runnable> events = new LinkedList<>();
     List<Timer> timers = new LinkedList<>();
 
-    float timeToNextAsteroid = 1;
+    float timeToNextAsteroid = -1;
 
     float timeToEvent;
     public GameEvents(Level level) {
         this.level = level;
-        timeToEvent = 1000000f;
+        timeToEvent = 10f;
 
         events.add(this::asteroidEvent);
         events.add(this::eventAlienInvasion);
