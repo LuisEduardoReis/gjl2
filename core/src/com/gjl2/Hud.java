@@ -98,12 +98,16 @@ public class Hud {
         Level level = this.gameScreen.level;
         font.getData().setScale(1.5f);
 
+        font.setColor(level.player.health < 3 ? Color.RED : Color.GREEN);
+        font.draw(spriteBatch, String.format("Crew health %d", level.player.health), 25, 350);
+        font.setColor(Color.GREEN);
+
         font.setColor(level.shipState.lost ? Color.RED : Color.GREEN);
         if (!level.shipState.lost || time % 1 < 0.75) {
             font.draw(spriteBatch, String.format("Earth %.1f ly", level.shipState.distanceToEarth), 25, 280);
         }
 
-        font.setColor(Color.GREEN);
+
         font.draw(spriteBatch, String.format("Hull status %d%%", level.shipState.hullStatus), 25, 210);
 
         font.setColor(level.shipState.isOxygenCritical() ? Color.RED : Color.GREEN);
@@ -113,6 +117,8 @@ public class Hud {
 
         font.setColor(level.shipState.shieldHits == 0 ? Color.RED : Color.GREEN);
         font.draw(spriteBatch, String.format("Shield level %d", level.shipState.shieldHits), 25, 70);
+
+        ;
 
         font.setColor(Color.WHITE);
         if (level.gameEvents.timeToNextAsteroid > 0) {
