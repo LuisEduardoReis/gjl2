@@ -13,8 +13,8 @@ public class Main extends Game {
 
 	public static boolean DEBUG = false;
 	public static boolean MUTE = false;
-	public static int VOLUME = 1;
-	public static int LAST_VOLUME = 1;
+	public static float VOLUME = 1;
+	public static float LAST_VOLUME = 1;
 
 	public static final int FPS = 60;
 

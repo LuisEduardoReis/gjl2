@@ -17,6 +17,9 @@ public class ShipState {
     public float engineBlowupTimer = ENGINE_BLOWUP_DELAY;
     public float distanceToEarth = INITIAL_DISTANCE_TO_EARTH;
 
+    public float alarmSoundTimer = 0;
+    public float alarmSoundDelay = 2f;
+
     ShipState(Level level) {
         this.level = level;
     }
@@ -53,6 +56,16 @@ public class ShipState {
         if (oxygenLevel == 0) {
             level.endGame("You suffocated");
         }
+
+        if (isAlarmOn()) {
+            alarmSoundTimer = Util.stepTo(alarmSoundTimer, 0, delta);
+            if (alarmSoundTimer == 0) {
+                alarmSoundTimer = alarmSoundDelay;
+                level.gameScreen.playSound(Assets.alarmSound);
+            }
+        } else {
+            alarmSoundTimer = 0;
+        }
     }
 
     public boolean hasAsteroidHits() {
@@ -64,6 +77,6 @@ public class ShipState {
     }
 
     public boolean isAlarmOn() {
-        return this.hasAsteroidHits() || isOxygenCritical() || engineOverloaded;
+        return hasAsteroidHits() || isOxygenCritical() || engineOverloaded;
     }
 }

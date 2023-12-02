@@ -1,6 +1,7 @@
 package com.gjl2;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -93,5 +94,9 @@ public class GameScreen extends ScreenAdapter {
 
         this.spriteBatch.dispose();
         this.shapeRenderer.dispose();
+    }
+
+    public void playSound(Sound sound) {
+        if (!level.gameOver) sound.play(Main.VOLUME);
     }
 }
