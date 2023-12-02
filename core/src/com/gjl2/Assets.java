@@ -1,6 +1,7 @@
 package com.gjl2;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -35,6 +36,8 @@ public class Assets {
 
     public static BitmapFont font;
 
+    public static Sound laserSound;
+
     public static void createAssets() {
         font = new BitmapFont(Gdx.files.internal("font.fnt"));
         testTexture = new Texture("badlogic.jpg");
@@ -63,6 +66,9 @@ public class Assets {
         com.badlogic.gdx.audio.Music menuMusic = Gdx.audio.newMusic(Gdx.files.internal("iamnotok.mp3"));
         menuMusic.setLooping(true);
         menuMusic.play();
+
+        laserSound = Gdx.audio.newSound(Gdx.files.internal("laser.wav"));
+
     }
 
     static TextureRegion getTileTextureById(int id) {

@@ -70,6 +70,7 @@ public class Player extends Entity {
             Bullet bullet = new Bullet();
             bullet.vx = 10 * (goingRight ? 1 : -1);
             level.addEntity(bullet, x,y - radius / 2);
+            Assets.laserSound.play(1f);
         }
 
         this.idleTimer = Util.stepTo(this.idleTimer, 0, delta);
