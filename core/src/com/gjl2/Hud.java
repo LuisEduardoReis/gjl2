@@ -13,6 +13,7 @@ public class Hud {
 
     public static final float MESSAGE_DURATION = 5f;
     public static final float WARNING_DURATION = 2f;
+    public static float AVATAR_ANIMATION_DELAY = 1f;
 
     static class HudMessage {
         String message;
@@ -28,6 +29,9 @@ public class Hud {
     private HudMessage warningMessage = null;
     private final List<HudMessage> messages = new LinkedList<>();
 
+    float avatarAnimationTimer = 0;
+    int avatarAnimationFrame = 0;
+
     Hud(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
     }
@@ -39,6 +43,13 @@ public class Hud {
             message.time += delta;
         }
         if (this.warningMessage != null) this.warningMessage.time += delta;
+
+        this.avatarAnimationTimer = Util.stepTo(this.avatarAnimationTimer, 0, delta);
+
+        if (this.avatarAnimationTimer == 0) {
+            this.avatarAnimationTimer = AVATAR_ANIMATION_DELAY;
+            this.avatarAnimationFrame = (avatarAnimationFrame + 1) % 2;
+        }
     }
 
     public void addWarning(String message) {
@@ -165,7 +176,7 @@ public class Hud {
         int scaleAvatar = 400;
         Util.affine2.idt();
         Util.affine2.translate((float) Main.WIDTH / 2, (float) Main.HEIGHT /2);
-        Util.affine2.scale(-1, 1);
+        Util.affine2.scale(this.avatarAnimationFrame == 0 ? -1 : 1, 1);
         Util.affine2.translate(- scaleAvatar / 2f, - scaleAvatar / 2f);
 
         spriteBatch.draw(Assets.playerGameOver, scaleAvatar, scaleAvatar, Util.affine2);
