@@ -94,7 +94,7 @@ public class Hud {
     public void renderShapes(ShapeRenderer shapeRenderer) {
         Level level = this.gameScreen.level;
         shapeRenderer.setColor(0, 0, 0, 0.5f);
-        shapeRenderer.rect(0, 0, 500, 300);
+        shapeRenderer.rect(0, 0, 520, 370);
 
         if (level.shipState.isAlarmOn()) {
             shapeRenderer.setColor(0.5f, 0, 0, 0.5f * (float) Math.abs(Math.sin(4 * this.time)));

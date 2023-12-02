@@ -67,7 +67,7 @@ public class Player extends Entity {
             }
         }
 
-        if (ammo > 0 && Gdx.input.isKeyJustPressed(GameKeys.FIRE)) {
+        if (ammo > 0 && Gdx.input.isKeyJustPressed(GameKeys.FIRE) && !currentTile.type.ladder) {
             ammo--;
             Bullet bullet = new Bullet();
             bullet.vx = 10 * (goingRight ? 1 : -1);
