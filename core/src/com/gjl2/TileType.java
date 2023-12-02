@@ -7,12 +7,13 @@ public class TileType {
 
     public static Map<Integer, TileType> TILETYPES_BY_ID = new HashMap<>();
     public static Map<String, TileType> TILETYPES = new HashMap<>();
+    public static TileType EMPTY_TILE;
 
     static {
         for (int i = 0; i < 255; i++) {
             createTileType(i, new TileType(true));
         }
-        getTileTypeBySheetPosition(0,0).setSolid(false).setName("empty");
+        EMPTY_TILE = getTileTypeBySheetPosition(0,0).setSolid(false).setName("empty");
         getTileTypeBySheetPosition(1,0).setSolid(false).setName("room");
         getTileTypeBySheetPosition(2,0).setSolid(false).setLadder(true).setName("ladder");
         getTileTypeBySheetPosition(0,1).setSolid(false).setName("door_frame");

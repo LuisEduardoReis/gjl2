@@ -8,7 +8,9 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Vector3;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,9 +19,12 @@ import static com.gjl2.TileType.*;
 
 public class Level {
 
+    public static final int NUM_STARS = 2000;
+    public static final int STARS_BOUNDARY = 6;
     GameScreen gameScreen;
     Player player;
     List<Entity> entities;
+    List<Vector3> stars = new ArrayList<>(NUM_STARS);
 
     public int width, height;
     Tile[] tiles;
@@ -77,6 +82,14 @@ public class Level {
         addEntity(this.player, 0,0);
 
         if (mapObjects != null) setupMapObjects(mapObjects);
+
+        for (int i = 0; i < NUM_STARS; i++) {
+            this.stars.add(new Vector3(
+                Util.randomRange(-STARS_BOUNDARY, width + STARS_BOUNDARY),
+                Util.randomRange(-STARS_BOUNDARY, height + STARS_BOUNDARY),
+                Util.randomRange(0.25f, 1)
+            ));
+        }
     }
 
     private void setupMapObjects(MapObjects mapObjects) {
@@ -135,6 +148,11 @@ public class Level {
 
         if (this.shipState.hullStatus == 0 || this.shipState.oxygenLevel == 0) {
             gameOver = true;
+        }
+
+        for (Vector3 star : this.stars) {
+            star.x += star.z * delta * 0.25f;
+            if (star.x > this.width + STARS_BOUNDARY) star.x = -STARS_BOUNDARY;
         }
     }
 
@@ -197,10 +215,14 @@ public class Level {
     }
 
     public void renderSprites(SpriteBatch spriteBatch) {
+        for (Vector3 star : stars) {
+            spriteBatch.draw(Assets.starSprite, star.x, star.y, 0.25f * star.z, 0.25f * star.z);
+        }
+
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 Tile tile = this.getTile(x, y);
-                spriteBatch.draw(Assets.getTileTextureById(tile.type.id), x, y, 1, 1);
+                if (tile.type != EMPTY_TILE) spriteBatch.draw(Assets.getTileTextureById(tile.type.id), x, y, 1, 1);
 
                 Tile overlayTile = this.getTileOverlay(x, y);
                 if (overlayTile.type != null) spriteBatch.draw(Assets.getTileTextureById(overlayTile.type.id), x, y, 1, 1);
