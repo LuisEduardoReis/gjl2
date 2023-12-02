@@ -19,6 +19,7 @@ public class Player extends Entity {
     int animationFrame = 0;
     int health = 500;
     int ammo = 0;
+    boolean isPlayerBeingDamaged = false;
 
     Interactable currentInteractable = null;
 
@@ -90,12 +91,15 @@ public class Player extends Entity {
             if (other.x < this.x) this.ex = 5;
             if (other.x >= this.x) this.ex = -5;
             this.ey = 3;
+            this.isPlayerBeingDamaged = true;
         }
     }
 
     Affine2 affine2 = new Affine2();
     @Override
     public void renderSprites(SpriteBatch spriteBatch) {
+        if(isPlayerBeingDamaged) spriteBatch.setColor(Color.RED);
+
         Tile currentTile = this.level.getTile(this.x, this.y);
         Tile tileAtFeet = this.level.getTile(this.x, this.y-this.radius-0.01f);
         affine2.idt();
@@ -117,6 +121,10 @@ public class Player extends Entity {
         else {
             spriteBatch.draw(Assets.playerMovement.get(0), r * 2, r * 2, affine2);
         }
+
+
+        spriteBatch.setColor(Color.WHITE);
+        isPlayerBeingDamaged = false;
     }
 
     @Override
