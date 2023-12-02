@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.gjl2.Main.TILE_SIZE;
@@ -29,10 +28,12 @@ public class Assets {
     public static TextureRegion arrowSprite;
     public static TextureRegion oxygenSprite;
     public static TextureRegion navigationSprite;
+    public static TextureRegion engineSprite;
     public static TextureRegion starSprite;
     public static TextureRegion alienSprite;
     public static TextureRegion alienChunkSprite;
     public static TextureRegion gunSprite;
+    public static TextureRegion engineFireSprite;
 
     public static BitmapFont font;
 
@@ -63,6 +64,8 @@ public class Assets {
         alienSprite = spriteTextures[1][4];
         alienChunkSprite = spriteTextures[1][5];
         gunSprite = spriteTextures[1][3];
+        engineSprite = spriteTextures[1][6];
+        engineFireSprite = spriteTextures[1][7];
 
         menuMusic = Gdx.audio.newMusic(Gdx.files.internal("iamnotok.mp3"));
         menuMusic.setLooping(true);

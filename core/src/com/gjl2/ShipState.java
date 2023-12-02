@@ -2,16 +2,18 @@ package com.gjl2;
 
 public class ShipState {
 
-    public static final int MAX_SHIELD_HITS = 1;
     public static final int TIME_TO_DEPLETE_OXYGEN = 30;
     public static final float SHIP_SPEED = 10f / 300;
     public static final float TIME_TO_REGENERATE_SHIELD = 10f;
+    private static final float ENGINE_BLOWUP_DELAY = 30;
 
     public final Level level;
     public float oxygenLevel = 100;
     public float shieldState = 100;
     public int hullStatus = 100;
     public boolean lost = false;
+    public boolean engineOverloaded = false;
+    public float engineBlowupTimer = ENGINE_BLOWUP_DELAY;
 
     public float distanceToEarth = 10;
 
@@ -32,6 +34,15 @@ public class ShipState {
         } else {
             distanceToEarth = Util.stepTo( distanceToEarth, 0, SHIP_SPEED * delta);
         }
+        if (engineOverloaded) {
+            engineBlowupTimer = Util.stepTo(engineBlowupTimer, 0, delta);
+            if (engineBlowupTimer == 0) {
+                engineOverloaded = false;
+                level.gameOver = true;
+            }
+        } else {
+            engineBlowupTimer = ENGINE_BLOWUP_DELAY;
+        }
     }
 
     public boolean hasAsteroidHits() {
@@ -43,6 +54,6 @@ public class ShipState {
     }
 
     public boolean isAlarmOn() {
-        return this.hasAsteroidHits() || isOxygenCritical();
+        return this.hasAsteroidHits() || isOxygenCritical() || engineOverloaded;
     }
 }

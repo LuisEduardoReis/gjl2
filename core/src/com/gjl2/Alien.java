@@ -12,8 +12,8 @@ public class Alien extends Entity{
     private float radius;
     private int direction;
     private float rotation = 0;
-    private float jumpTimer = 0;
-    private float jumpDelay = 2;
+    private float jumpTimer = (float) (Math.random() * 2);
+    private final float jumpDelay = 2;
 
     Alien() {
         this.radius = 0.4f;

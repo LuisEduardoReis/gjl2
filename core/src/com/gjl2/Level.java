@@ -118,6 +118,9 @@ public class Level {
             } else
             if ("navigation-room".equals(type)) {
                 addEntity(new NavigationRoom(), ox, oy);
+            } else
+            if ("engine-room".equals(type)) {
+                addEntity(new EngineRoom(), ox, oy);
             }
         }
     }

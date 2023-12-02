@@ -23,13 +23,15 @@ public class GameEvents {
 
         events.add(this::asteroidEvent);
         events.add(this::eventAlienInvasion);
+        events.add(this::shipLost);
+        events.add(this::engineOverload);
     }
 
     public void update(float delta){
         timeToEvent = Util.stepTo(timeToEvent, 0, 1*delta);
         if (timeToEvent == 0) {
             rollEvent();
-            timeToEvent =  Util.randomRange(30, 45);
+            timeToEvent =  Util.randomRange(15, 30);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) this.rollEvent();
@@ -99,9 +101,22 @@ public class GameEvents {
             Tile overlayTile = this.level.getTileOverlay(x,y);
             if (overlayTile.type != null) continue;
 
-            this.level.gameScreen.hud.addWarning("Alien invaded!");
-            this.level.addEntity(new Alien(), x,y);
+            this.level.gameScreen.hud.addWarning("Aliens invaded!");
+            for (int j = 0; j < 4; j++) {
+                this.level.addEntity(new Alien(), x + j*0.01f,y);
+            }
+
             break;
         }
+    }
+
+    private void shipLost() {
+        this.level.gameScreen.hud.addWarning("Navigation failed!");
+        level.shipState.lost = true;
+    }
+
+    private void engineOverload() {
+        this.level.gameScreen.hud.addWarning("Engine overloaded!");
+        level.shipState.engineOverloaded = true;
     }
 }

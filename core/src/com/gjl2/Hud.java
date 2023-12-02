@@ -119,10 +119,13 @@ public class Hud {
         font.setColor(level.shipState.shieldState < 100 ? Color.RED : Color.BLUE);
         font.draw(spriteBatch, String.format("Shield energy %d%%", (int) Math.floor(level.shipState.shieldState)), 25, 70);
 
-        font.setColor(Color.WHITE);
-        if (level.gameEvents.timeToNextAsteroid > 0) {
-            font.draw(spriteBatch, String.format(String.format("Asteroid hit in %.1f", level.gameEvents.timeToNextAsteroid)), 0, Main.HEIGHT - 50);
+        font.setColor(Color.RED);
+        if (level.shipState.engineOverloaded) {
+            font.draw(spriteBatch, String.format(String.format("Engine blows up in %.1f", level.shipState.engineBlowupTimer)), 10, Main.HEIGHT - 50);
+        } else if (level.gameEvents.timeToNextAsteroid > 0) {
+            font.draw(spriteBatch, String.format(String.format("Asteroid hit in %.1f", level.gameEvents.timeToNextAsteroid)), 10, Main.HEIGHT - 50);
         }
+
 
         font.setColor(Color.WHITE);
         Assets.font.getData().setScale(1.5f);
