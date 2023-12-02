@@ -37,6 +37,7 @@ public class Assets {
     public static BitmapFont font;
 
     public static Sound laserSound;
+    public static com.badlogic.gdx.audio.Music menuMusic;
 
     public static void createAssets() {
         font = new BitmapFont(Gdx.files.internal("font.fnt"));
@@ -63,7 +64,7 @@ public class Assets {
         alienChunkSprite = spriteTextures[1][5];
         gunSprite = spriteTextures[1][3];
 
-        com.badlogic.gdx.audio.Music menuMusic = Gdx.audio.newMusic(Gdx.files.internal("iamnotok.mp3"));
+        menuMusic = Gdx.audio.newMusic(Gdx.files.internal("iamnotok.mp3"));
         menuMusic.setLooping(true);
         menuMusic.play();
 

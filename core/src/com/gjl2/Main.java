@@ -12,6 +12,9 @@ public class Main extends Game {
 	public static final int TILE_SIZE = 16;
 
 	public static boolean DEBUG = false;
+	public static boolean MUTE = false;
+	public static int VOLUME = 1;
+	public static int LAST_VOLUME = 1;
 
 	public static final int FPS = 60;
 
@@ -30,5 +33,17 @@ public class Main extends Game {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
 			DEBUG = !DEBUG;
 		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.F2)) {
+			MUTE = !MUTE;
+		}
+		if (MUTE){
+			if (VOLUME != 0)
+				LAST_VOLUME = VOLUME;
+			VOLUME = 0;
+
+		}else {
+			VOLUME = LAST_VOLUME;
+		}
+		Assets.menuMusic.setVolume(VOLUME);
 	}
 }
