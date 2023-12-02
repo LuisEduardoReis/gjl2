@@ -81,6 +81,8 @@ public class GameEvents {
                 Tile overlayTile = this.level.getTileOverlay(x, y);
                 if (overlayTile.type != null) continue;
 
+                level.gameScreen.playSound(Assets.explosionSound);
+                level.gameScreen.screenShakeTimer = 1f;
                 this.level.addEntity(new AsteroidHit(), x, y);
                 this.level.shipState.hullStatus = Math.max(0, this.level.shipState.hullStatus - 10);
                 break;

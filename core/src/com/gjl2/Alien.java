@@ -75,6 +75,8 @@ public class Alien extends Entity{
     @Override
     public void die() {
         remove = true;
+        System.out.println("die");
+        level.gameScreen.playSound(Assets.hitSound);
         for (int i = 0; i < 10; i++) {
             level.addEntity(new AlienChunkParticle(), x,y);
         }

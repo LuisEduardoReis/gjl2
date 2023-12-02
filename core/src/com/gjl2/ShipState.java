@@ -42,7 +42,7 @@ public class ShipState {
             engineBlowupTimer = Util.stepTo(engineBlowupTimer, 0, delta);
             if (engineBlowupTimer == 0) {
                 engineOverloaded = false;
-                Assets.explosionSound.play((float) Main.VOLUME);
+                level.gameScreen.playSound(Assets.explosionSound);
                 level.endGame("The engine blew up");
             }
         } else {
@@ -61,7 +61,7 @@ public class ShipState {
             alarmSoundTimer = Util.stepTo(alarmSoundTimer, 0, delta);
             if (alarmSoundTimer == 0) {
                 alarmSoundTimer = alarmSoundDelay;
-                level.gameScreen.playSound(Assets.alarmSound);
+                level.gameScreen.playSound(Assets.alarmSound, 0.5f);
             }
         } else {
             alarmSoundTimer = 0;

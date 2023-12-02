@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class GameScreen extends ScreenAdapter {
 
+    private static final float SHAKE_AMOUNT = 0.1f;
     SpriteBatch spriteBatch;
     ShapeRenderer shapeRenderer;
     Level level;
@@ -20,6 +21,7 @@ public class GameScreen extends ScreenAdapter {
     Viewport viewport;
 
     float cameraScale = 12f / Main.WIDTH;
+    public float screenShakeTimer = 0;
 
 
     GameScreen() {
@@ -40,7 +42,16 @@ public class GameScreen extends ScreenAdapter {
 
         ScreenUtils.clear(0,0,0,1);
         this.viewport.apply();
-        this.camera.position.set(level.player.x, level.player.y, 0);
+
+        float sx = level.player.x;
+        float sy = level.player.y;
+        if (screenShakeTimer > 0) {
+            screenShakeTimer = Util.stepTo(screenShakeTimer, 0, delta);
+            sx += Util.randomRange(-SHAKE_AMOUNT, SHAKE_AMOUNT);
+            sy += Util.randomRange(-SHAKE_AMOUNT, SHAKE_AMOUNT);
+        }
+        this.camera.position.set(sx, sy, 0);
+
         this.camera.zoom = cameraScale;
         this.camera.update();
 
@@ -96,7 +107,10 @@ public class GameScreen extends ScreenAdapter {
         this.shapeRenderer.dispose();
     }
 
+    public void playSound(Sound sound, float volume) {
+        if (!level.gameOver) sound.play(Main.VOLUME * volume);
+    }
     public void playSound(Sound sound) {
-        if (!level.gameOver) sound.play(Main.VOLUME);
+        playSound(sound, 1f);
     }
 }

@@ -119,8 +119,9 @@ public class Player extends Entity {
     @Override
     protected void damage(int value) {
         super.damage(value);
+        level.gameScreen.screenShakeTimer = 0.1f;
         if (!level.gameOver) {
-            Assets.hitSound.play((float) Main.VOLUME);
+            level.gameScreen.playSound(Assets.hitSound);
         }
     }
 
