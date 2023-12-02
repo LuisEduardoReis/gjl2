@@ -56,6 +56,6 @@ public class NavigationRoom extends Entity implements Interactable, PointableEnt
 
     @Override
     public String getHoverMessage() {
-        return "Press space to fix course";
+        return lost ? "Press space to fix course" : null;
     }
 }

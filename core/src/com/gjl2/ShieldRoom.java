@@ -21,7 +21,7 @@ public class ShieldRoom extends Entity implements Interactable {
 
     @Override
     public String getHoverMessage() {
-        return "Press space to replenish shields";
+        return this.level.shipState.shieldHits < ShipState.MAX_SHIELD_HITS ? "Press space to replenish shields" : null;
     }
 }
 

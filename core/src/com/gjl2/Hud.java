@@ -129,7 +129,7 @@ public class Hud {
             addWarning("GAME OVER");
         }
 
-        if (level.player.currentInteractable != null) {
+        if (level.player.currentInteractable != null && level.player.currentInteractable.getHoverMessage() != null) {
             font.setColor(Color.WHITE);
             font.getData().setScale(1.5f);
             Util.drawTextCentered(spriteBatch, font, level.player.currentInteractable.getHoverMessage(), Main.WIDTH / 2f, Main.HEIGHT * 0.7f);

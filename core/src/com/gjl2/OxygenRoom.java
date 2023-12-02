@@ -32,7 +32,7 @@ public class OxygenRoom extends Entity implements PointableEntity, Interactable 
 
     @Override
     public String getHoverMessage() {
-        return "Press space to replenish oxygen";
+        return this.level.shipState.oxygenLevel < 100 ? "Press space to replenish oxygen" : null;
     }
 }
 
