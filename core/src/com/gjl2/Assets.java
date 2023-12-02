@@ -23,7 +23,7 @@ public class Assets {
     public static TextureRegion doorSprite;
     public static List<TextureRegion> playerMovement = new ArrayList<>(4);
     public static List<TextureRegion> playerClimbing = new ArrayList<>(2);
-//    public static TextureRegion playerBack;
+    public static TextureRegion playerGameOver;
     public static TextureRegion asteroidHitSprite;
     public static TextureRegion arrowSprite;
     public static TextureRegion oxygenSprite;
@@ -56,6 +56,7 @@ public class Assets {
         playerMovement.add(spriteTextures[0][4]);
         playerClimbing.add(spriteTextures[0][5]);
         playerClimbing.add(spriteTextures[0][6]);
+        playerGameOver = spriteTextures[0][7];
         asteroidHitSprite = spriteTextures[1][0];
         arrowSprite = spriteTextures[1][1];
         oxygenSprite = tileTextures[0][4];

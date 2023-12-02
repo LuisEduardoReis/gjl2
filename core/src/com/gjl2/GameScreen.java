@@ -1,21 +1,12 @@
 package com.gjl2;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.GL32;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-
-import java.util.ArrayList;
 
 public class GameScreen extends ScreenAdapter {
 
@@ -85,7 +76,7 @@ public class GameScreen extends ScreenAdapter {
         this.shapeRenderer.end();
 
         this.spriteBatch.begin();
-        this.hud.renderText(spriteBatch);
+        this.hud.renderOverlay(spriteBatch);
         this.spriteBatch.end();
     }
 

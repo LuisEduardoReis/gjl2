@@ -60,7 +60,7 @@ public class GameEvents {
     }
 
     private void eventAsteroidHit() {
-        if (level.shipState.shieldState >= 100 ){
+        if (level.shipState.shieldState >= 100) {
             level.shipState.shieldState = 0;
             this.level.gameScreen.hud.addWarning("Asteroid deflected!");
         } else {
@@ -71,16 +71,16 @@ public class GameEvents {
                 float x = (float) (Math.floor(Util.randomRange(0, this.level.width)) + 0.5f);
                 float y = (float) (Math.floor(Util.randomRange(0, this.level.height)) + 0.5f);
 
-                Tile tile = this.level.getTile(x,y);
+                Tile tile = this.level.getTile(x, y);
                 if (tile.type != TileType.getTileType("room")) continue;
 
-                Tile tileBelow = this.level.getTile(x,y - 1);
+                Tile tileBelow = this.level.getTile(x, y - 1);
                 if (!tileBelow.type.solid) continue;
 
-                Tile overlayTile = this.level.getTileOverlay(x,y);
+                Tile overlayTile = this.level.getTileOverlay(x, y);
                 if (overlayTile.type != null) continue;
 
-                this.level.addEntity(new AsteroidHit(), x,y);
+                this.level.addEntity(new AsteroidHit(), x, y);
                 this.level.shipState.hullStatus = Math.max(0, this.level.shipState.hullStatus - 10);
                 break;
             }
@@ -92,13 +92,13 @@ public class GameEvents {
             float x = (float) (Math.floor(Util.randomRange(0, this.level.width)) + 0.5f);
             float y = (float) (Math.floor(Util.randomRange(0, this.level.height)) + 0.5f);
 
-            Tile tile = this.level.getTile(x,y);
+            Tile tile = this.level.getTile(x, y);
             if (tile.type != TileType.getTileType("room")) continue;
 
-            Tile tileBelow = this.level.getTile(x,y - 1);
+            Tile tileBelow = this.level.getTile(x, y - 1);
             if (!tileBelow.type.solid) continue;
 
-            Tile overlayTile = this.level.getTileOverlay(x,y);
+            Tile overlayTile = this.level.getTileOverlay(x, y);
             if (overlayTile.type != null) continue;
 
             this.level.gameScreen.hud.addWarning("Aliens invaded!");
