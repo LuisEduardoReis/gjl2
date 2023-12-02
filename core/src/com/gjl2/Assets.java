@@ -55,6 +55,10 @@ public class Assets {
         navigationSprite = tileTextures[0][7];
         starSprite = spriteTextures[1][2];
         alienSprite = spriteTextures[1][4];
+
+        com.badlogic.gdx.audio.Music menuMusic = Gdx.audio.newMusic(Gdx.files.internal("iamnotok.mp3"));
+        menuMusic.setLooping(true);
+        menuMusic.play();
     }
 
     static TextureRegion getTileTextureById(int id) {
