@@ -5,10 +5,11 @@ public class ShipState {
     public static final int MAX_SHIELD_HITS = 1;
     public static final int TIME_TO_DEPLETE_OXYGEN = 30;
     public static final float SHIP_SPEED = 10f / 300;
+    public static final float TIME_TO_REGENERATE_SHIELD = 10f;
 
     public final Level level;
     public float oxygenLevel = 100;
-    public int shieldHits = 0;
+    public float shieldState = 100;
     public int hullStatus = 100;
     public boolean lost = false;
 

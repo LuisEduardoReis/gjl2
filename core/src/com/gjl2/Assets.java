@@ -29,6 +29,7 @@ public class Assets {
     public static TextureRegion oxygenSprite;
     public static TextureRegion navigationSprite;
     public static TextureRegion starSprite;
+    public static TextureRegion alienSprite;
 
     public static BitmapFont font;
 
@@ -53,6 +54,7 @@ public class Assets {
         oxygenSprite = tileTextures[0][4];
         navigationSprite = tileTextures[0][7];
         starSprite = spriteTextures[1][2];
+        alienSprite = spriteTextures[1][4];
     }
 
     static TextureRegion getTileTextureById(int id) {

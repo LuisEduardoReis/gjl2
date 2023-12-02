@@ -17,8 +17,8 @@ public class Player extends Entity {
     float idleTimer = 0;
     float animationTimer = 0;
     int animationFrame = 0;
-
     int health = 500;
+    int ammo = 0;
 
     Interactable currentInteractable = null;
 
@@ -26,7 +26,7 @@ public class Player extends Entity {
         this.radius = 0.4f;
         this.hasGravity = true;
         this.collidesWithLevel = true;
-        this.collidesWithOthers = true;
+        this.pushesOthers = true;
     }
 
     @Override

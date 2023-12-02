@@ -163,12 +163,14 @@ public class Level {
 
     private void handleEntityCollisions(float delta) {
         for (Entity e : entities) {
+            if (!e.collidesWithOthers) continue;
             for (Entity o : entities) {
+                if (!o.collidesWithOthers) continue;
                 if (e == o) continue;
                 float dist = Util.pointDistance(e.x, e.y, o.x, o.y);
                 if (dist < (e.radius + o.radius)) {
                     e.collide(o, delta);
-                    if (e.collidesWithOthers && o.collidesWithOthers) {
+                    if (e.pushesOthers && o.pushesOthers) {
                         float dx = (e.x - o.x) / dist;
                         float dy = (e.y - o.y) / dist;
                         o.x -= dx * (e.radius + o.radius - dist) * 0.5f;

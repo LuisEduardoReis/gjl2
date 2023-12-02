@@ -4,27 +4,22 @@ public class ShieldRoom extends Entity implements Interactable {
 
     public ShieldRoom() {
         this.radius = .75f;
-        this.timer = new Timer(3);
     }
-
-    private final Timer timer;
 
     @Override
     public void interactHold(Player player, float delta) {
-        timer.update(delta);
-        if (timer.timer == 0) {
-            this.level.gameScreen.hud.addMessage("Shield replenished");
-            this.level.shipState.shieldHits = (int) Util.clamp(this.level.shipState.shieldHits + 1, 0, ShipState.MAX_SHIELD_HITS); //could change this to have its own timer so that shield repair does not happen immediately
-            if (this.level.shipState.shieldHits == ShipState.MAX_SHIELD_HITS) {
-                this.level.gameScreen.hud.addMessage("Shields full");
+        if (level.shipState.shieldState < 100) {
+            level.shipState.shieldState = Util.stepTo(level.shipState.shieldState, 100, delta * 100 / ShipState.TIME_TO_REGENERATE_SHIELD);
+            if (level.shipState.shieldState == 100) {
+                this.level.gameScreen.hud.addMessage("Shield replenished");
             }
-            timer.reset();
         }
+
     }
 
     @Override
     public String getHoverMessage() {
-        return this.level.shipState.shieldHits < ShipState.MAX_SHIELD_HITS ? "Press space to replenish shields" : null;
+        return level.shipState.shieldState < 100 ? "Press space to replenish shields" : null;
     }
 }
 

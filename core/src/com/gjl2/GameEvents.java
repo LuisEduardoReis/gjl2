@@ -53,15 +53,18 @@ public class GameEvents {
     }
 
     private void asteroidEvent() {
-        this.level.gameScreen.hud.addWarning("Incoming Asteroid!!!");
+        this.level.gameScreen.hud.addWarning("Incoming Asteroid!");
         this.timeToNextAsteroid = 5;
     }
 
     private void eventAsteroidHit() {
-        if (level.shipState.shieldHits > 0 ){
-            level.shipState.shieldHits--;
+        if (level.shipState.shieldState >= 100 ){
+            level.shipState.shieldState = 0;
             this.level.gameScreen.hud.addWarning("Asteroid deflected!");
         } else {
+            level.shipState.shieldState = 0;
+            this.level.gameScreen.hud.addWarning("Asteroid hit!");
+
             for (int i = 0; i < 100; i++) {
                 float x = (float) (Math.floor(Util.randomRange(0, this.level.width)) + 0.5f);
                 float y = (float) (Math.floor(Util.randomRange(0, this.level.height)) + 0.5f);
@@ -75,7 +78,6 @@ public class GameEvents {
                 Tile overlayTile = this.level.getTileOverlay(x,y);
                 if (overlayTile.type != null) continue;
 
-                this.level.gameScreen.hud.addWarning("Asteroid hit!");
                 this.level.addEntity(new AsteroidHit(), x,y);
                 this.level.shipState.hullStatus = Math.max(0, this.level.shipState.hullStatus - 10);
                 break;

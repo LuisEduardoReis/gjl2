@@ -115,8 +115,8 @@ public class Hud {
             font.draw(spriteBatch, String.format("Oxygen level %d%%", (int) level.shipState.oxygenLevel), 25, 140);
         }
 
-        font.setColor(level.shipState.shieldHits == 0 ? Color.RED : Color.GREEN);
-        font.draw(spriteBatch, String.format("Shield level %d", level.shipState.shieldHits), 25, 70);
+        font.setColor(level.shipState.shieldState < 100 ? Color.RED : Color.BLUE);
+        font.draw(spriteBatch, String.format("Shield energy %d%%", (int) Math.floor(level.shipState.shieldState)), 25, 70);
 
         ;
 
@@ -148,6 +148,5 @@ public class Hud {
             font.getData().setScale(1.5f);
             Util.drawTextCentered(spriteBatch, font, level.player.currentInteractable.getHoverMessage(), Main.WIDTH / 2f, Main.HEIGHT * 0.7f);
         }
-
     }
 }
