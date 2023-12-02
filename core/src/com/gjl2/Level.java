@@ -135,6 +135,9 @@ public class Level {
                 tp2 = new Teleporter(2, ox, oy);
                 addEntity(tp2, ox, oy);
             }
+            if ("engine-fire".equals(type)) {
+                addEntity(new Engine(ox, oy), ox, oy);
+            }
         }
         tp1.linkTeleporter(tp2);
         tp2.linkTeleporter(tp1);

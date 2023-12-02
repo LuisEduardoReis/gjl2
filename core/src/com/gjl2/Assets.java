@@ -35,6 +35,10 @@ public class Assets {
     public static TextureRegion gunSprite;
     public static TextureRegion engineFireSprite;
 
+    public static TextureRegion engineFireSprite1;
+    public static TextureRegion engineFireSprite2;
+    public static TextureRegion engineFireSprite3;
+
     public static BitmapFont font;
 
     public static Sound laserSound;
@@ -74,6 +78,9 @@ public class Assets {
         gunSprite = spriteTextures[1][3];
         engineSprite = spriteTextures[1][6];
         engineFireSprite = spriteTextures[1][7];
+        engineFireSprite1 = spriteTextures[2][0];
+        engineFireSprite2 = spriteTextures[3][0];
+        engineFireSprite3 = spriteTextures[4][0];
 
         menuMusic = Gdx.audio.newMusic(Gdx.files.internal("iamnotok.mp3"));
         menuMusic.setLooping(true);

@@ -119,7 +119,7 @@ public class GameEvents {
     }
 
     private void engineOverload() {
-        this.level.gameScreen.hud.addWarning("Engine overloaded!");
+        this.level.gameScreen.hud.addWarning("Engine.java overloaded!");
         level.shipState.engineOverloaded = true;
     }
 }
