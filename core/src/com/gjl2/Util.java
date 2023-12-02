@@ -4,8 +4,11 @@ import com.badlogic.gdx.graphics.GL32;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Affine2;
 
 public class Util {
+
+    public static Affine2 affine2 = new Affine2();
 
     public static float pointDistanceSquare(float x1, float y1, float x2, float y2) {
         float x = x2 - x1;
