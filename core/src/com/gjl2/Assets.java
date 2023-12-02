@@ -67,7 +67,7 @@ public class Assets {
         menuMusic.setLooping(true);
         menuMusic.play();
 
-        laserSound = Gdx.audio.newSound(Gdx.files.internal("laser.wav"));
+        laserSound = Gdx.audio.newSound(Gdx.files.internal("laserShoot.wav"));
 
     }
 
