@@ -165,9 +165,12 @@ public class Hud {
         }
 
         if (level.gameOver) {
-            font.getData().setScale(4f);
+
             font.setColor(Color.WHITE);
+            font.getData().setScale(4f);
             Util.drawTextCentered(spriteBatch, font, "GAME OVER", Main.WIDTH / 2f, Main.HEIGHT * 0.8f);
+            font.getData().setScale(2f);
+            Util.drawTextCentered(spriteBatch, font, level.gameOverReason, Main.WIDTH / 2f, Main.HEIGHT * 0.2f);
             renderAvatar(spriteBatch);
         }
     }

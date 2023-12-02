@@ -37,6 +37,7 @@ public class Level {
     ShipState shipState;
 
     public boolean gameOver;
+    public String gameOverReason = "You died somehow...";
 
     Level(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
@@ -154,13 +155,13 @@ public class Level {
             this.entities = this.entities.stream().filter(e -> !e.remove).collect(Collectors.toList());
         }
 
-        if (this.shipState.hullStatus == 0 || this.shipState.oxygenLevel == 0 || this.player.health == 0) {
-            if (!Main.DEBUG) gameOver = true;
-        }
-
         for (Vector3 star : this.stars) {
             star.x += star.z * delta * 0.25f;
             if (star.x > this.width + STARS_BOUNDARY) star.x = -STARS_BOUNDARY;
+        }
+
+        if (player.health == 0) {
+            endGame("You were killed by aliens");
         }
     }
 
@@ -290,5 +291,10 @@ public class Level {
 
     public Tile getTileOverlay(float x, float y) {
         return getTileOverlay((int) Math.floor(x), (int) Math.floor(y));
+    }
+
+    public void endGame(String reason) {
+        gameOver = true;
+        gameOverReason = reason;
     }
 }

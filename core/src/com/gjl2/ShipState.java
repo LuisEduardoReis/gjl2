@@ -15,7 +15,6 @@ public class ShipState {
     public boolean lost = false;
     public boolean engineOverloaded = false;
     public float engineBlowupTimer = ENGINE_BLOWUP_DELAY;
-
     public float distanceToEarth = INITIAL_DISTANCE_TO_EARTH;
 
     ShipState(Level level) {
@@ -37,10 +36,18 @@ public class ShipState {
             engineBlowupTimer = Util.stepTo(engineBlowupTimer, 0, delta);
             if (engineBlowupTimer == 0) {
                 engineOverloaded = false;
-                level.gameOver = true;
+                level.endGame("The engine blew up");
             }
         } else {
             engineBlowupTimer = ENGINE_BLOWUP_DELAY;
+        }
+
+
+        if (hullStatus == 0) {
+            level.endGame("The ship desintegrated");
+        }
+        if (oxygenLevel == 0) {
+            level.endGame("You suffocated");
         }
     }
 
