@@ -24,11 +24,4 @@ public class AirParticle extends Particle {
         x += 2 * delta * (dx + dy * 1.5f);
         y += 2 * delta * (dy - dx * 1.5f);
     }
-
-    @Override
-    public void renderShapes(ShapeRenderer shapeRenderer) {
-        float s = 0.075f;
-        shapeRenderer.setColor(Color.DARK_GRAY);
-        shapeRenderer.rect(x - s/2,y - s/2, s,s);
-    }
 }

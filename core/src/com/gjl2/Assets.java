@@ -30,6 +30,7 @@ public class Assets {
     public static TextureRegion navigationSprite;
     public static TextureRegion starSprite;
     public static TextureRegion alienSprite;
+    public static TextureRegion gunSprite;
 
     public static BitmapFont font;
 
@@ -55,6 +56,7 @@ public class Assets {
         navigationSprite = tileTextures[0][7];
         starSprite = spriteTextures[1][2];
         alienSprite = spriteTextures[1][4];
+        gunSprite = spriteTextures[1][3];
 
         com.badlogic.gdx.audio.Music menuMusic = Gdx.audio.newMusic(Gdx.files.internal("iamnotok.mp3"));
         menuMusic.setLooping(true);

@@ -71,4 +71,12 @@ public class Alien extends Entity{
         affine2.translate(-radius,-radius);
         spriteBatch.draw(Assets.alienSprite, 2*radius, 2*radius, affine2);
     }
+
+    @Override
+    public void die() {
+        remove = true;
+        for (int i = 0; i < 20; i++) {
+            level.addEntity(new AlienChunkParticle(), x,y);
+        }
+    }
 }

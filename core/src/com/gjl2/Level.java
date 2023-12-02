@@ -195,7 +195,7 @@ public class Level {
                 entity.y = entity.py;
                 entity.vy = 0;
                 entity.vx = 0;
-
+                entity.handleLevelCollision(0, 0);
             }
 
             if (entity.isTileSolid(getTile(xc - 1, yc)) && xr < entity.radius) {

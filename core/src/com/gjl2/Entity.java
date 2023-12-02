@@ -25,6 +25,8 @@ public class Entity {
     public boolean collidesWithOthers = true;
     public boolean pushesOthers = false;
     public boolean remove = false;
+    public float health = 100;
+    public boolean dead = false;
 
     Entity() {
     }
@@ -44,6 +46,11 @@ public class Entity {
 
         this.x += (this.vx + this.ex) * delta;
         this.y += (this.vy + this.ey) * delta;
+
+        if (health <= 0 && !dead) {
+            dead = true;
+            die();
+        }
     }
 
     void collide(Entity other,float delta) {}
@@ -69,5 +76,12 @@ public class Entity {
     }
 
     public void handleLevelCollision(float x, float y){
+    }
+
+    protected void damage(int value) {
+        health = Util.stepTo(health, 0, value);
+    }
+
+    public void die() {
     }
 }

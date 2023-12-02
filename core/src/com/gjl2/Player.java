@@ -18,7 +18,7 @@ public class Player extends Entity {
     float animationTimer = 0;
     int animationFrame = 0;
     int health = 100;
-    int ammo = 0;
+    int ammo = 100;
     boolean isPlayerBeingDamaged = false;
 
     Interactable currentInteractable = null;
@@ -65,6 +65,13 @@ public class Player extends Entity {
             }
         }
 
+        if (ammo > 0 && Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && currentInteractable == null) {
+            ammo--;
+            Bullet bullet = new Bullet();
+            bullet.vx = 10 * (goingRight ? 1 : -1);
+            level.addEntity(bullet, x,y - radius / 2);
+        }
+
         this.idleTimer = Util.stepTo(this.idleTimer, 0, delta);
         this.animationTimer = Util.stepTo(this.animationTimer, 0, delta);
 
@@ -87,7 +94,7 @@ public class Player extends Entity {
                 ((Interactable) other).interactHold(this, delta);
             }
         }else if (other instanceof Alien){
-            health = (int) Math.max(0, health -1);
+            health = Util.stepTo(health, 0, 1);
             if (other.x < this.x) this.ex = 5;
             if (other.x >= this.x) this.ex = -5;
             this.ey = 3;
@@ -108,8 +115,9 @@ public class Player extends Entity {
         affine2.translate(r, r);
         affine2.scale(this.goingRight ? -1 : 1, 1);
         affine2.translate(-r, -r);
+        boolean onLadder = currentTile.type.ladder && !tileAtFeet.type.solid;
 
-        if (currentTile.type.ladder && !tileAtFeet.type.solid) {
+        if (onLadder) {
             if (this.isClimbing) {
                 spriteBatch.draw(Assets.playerClimbing.get(this.animationFrame % 2), r * 2, r * 2, affine2);
             } else {
@@ -117,14 +125,17 @@ public class Player extends Entity {
             }
         } else if (isMoving()) {
             spriteBatch.draw(Assets.playerMovement.get(this.animationFrame), r * 2, r * 2, affine2);
-        }
-        else {
+        } else {
             spriteBatch.draw(Assets.playerMovement.get(0), r * 2, r * 2, affine2);
         }
 
 
         spriteBatch.setColor(Color.WHITE);
         isPlayerBeingDamaged = false;
+
+        if (ammo > 0 && !onLadder) {
+            spriteBatch.draw(Assets.gunSprite, r * 2,r * 2, affine2);
+        }
     }
 
     @Override

@@ -99,7 +99,7 @@ public class Hud {
         font.getData().setScale(1.5f);
 
         font.setColor(level.player.health < 3 ? Color.RED : Color.GREEN);
-        font.draw(spriteBatch, String.format("Crew health %d", level.player.health), 25, 350);
+        font.draw(spriteBatch, String.format("Crew health %d", (int) level.player.health), 25, 350);
         font.setColor(Color.GREEN);
 
         font.setColor(level.shipState.lost ? Color.RED : Color.GREEN);
