@@ -39,6 +39,9 @@ public class Level {
     public boolean gameOver;
     public String gameOverReason = "You died somehow...";
 
+    public Teleporter tp1;
+    public Teleporter tp2;
+
     Level(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
 
@@ -122,8 +125,19 @@ public class Level {
             } else
             if ("engine-room".equals(type)) {
                 addEntity(new EngineRoom(), ox, oy);
+            } else
+            if ("teleporter1".equals(type)) {
+                tp1 = new Teleporter(1, ox, oy);
+                addEntity(tp1, ox, oy);
+            } else
+            if ("teleporter2".equals(type)) {
+                tp2 = new Teleporter(2, ox, oy);
+                addEntity(tp2, ox, oy);
             }
         }
+
+        tp1.linkTeleporter(tp2);
+        tp2.linkTeleporter(tp1);
     }
 
     public void addEntity(Entity entity, float x, float y) {
