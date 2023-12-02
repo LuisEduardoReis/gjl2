@@ -16,6 +16,9 @@ public class Entity {
     public float vy = 0;
     public float px = 0;
     public float py = 0;
+    public float ex = 0;
+    public float ey = 0;
+    public float eFriction = 0.95f;
     public boolean hasGravity = false;
     public float radius = 0.25f;
     public boolean collidesWithLevel = false;
@@ -35,8 +38,12 @@ public class Entity {
         if (this.hasGravity) {
             this.vy -= GRAVITY * delta;
         }
-        this.x += this.vx * delta;
-        this.y += this.vy * delta;
+
+        this.ex = this.eFriction * this.ex;
+        this.ey = this.eFriction * this.ey;
+
+        this.x += (this.vx + this.ex) * delta;
+        this.y += (this.vy + this.ey) * delta;
     }
 
     void collide(Entity other,float delta) {}
