@@ -60,7 +60,11 @@ public class Level {
                 TiledMapTileLayer.Cell cell = mapTiles.getCell(x, y);
                 getTile(x,y).x = x;
                 getTile(x,y).y = y;
-                getTile(x, y).type = getTileTypeById(cell.getTile().getId() - 1);
+                if (cell != null) {
+                    getTile(x, y).type = getTileTypeById(cell.getTile().getId() - 1);
+                } else {
+                    getTile(x,y).type = getTileType("empty");
+                }
 
                 TiledMapTileLayer.Cell cellOverlay = overlayTiles.getCell(x, y);
                 getTileOverlay(x, y).x = x;
