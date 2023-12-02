@@ -24,6 +24,7 @@ public class Level {
     GameScreen gameScreen;
     Player player;
     List<Entity> entities;
+    List<Entity> newEntities;
     List<Vector3> stars = new ArrayList<>(NUM_STARS);
 
     public int width, height;
@@ -43,6 +44,7 @@ public class Level {
         this.gameEvents = new GameEvents(this);
         this.shipState = new ShipState(this);
         this.entities = new LinkedList<>();
+        this.newEntities = new LinkedList<>();
 
         TiledMap map = new TmxMapLoader(new InternalFileHandleResolver()).load("level.tmx");
         this.width = (int) map.getProperties().get("width");
@@ -121,7 +123,7 @@ public class Level {
     }
 
     public void addEntity(Entity entity, float x, float y) {
-        this.entities.add(entity);
+        this.newEntities.add(entity);
         entity.x = x;
         entity.y = y;
         entity.level = this;
@@ -138,6 +140,9 @@ public class Level {
 
         this.gameEvents.update(delta);
         this.shipState.update(delta);
+
+        this.entities.addAll(newEntities);
+        this.newEntities.clear();
 
         handleEntityCollisions(delta);
         handleLevelCollisions();

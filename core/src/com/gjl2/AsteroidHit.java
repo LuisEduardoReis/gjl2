@@ -9,6 +9,8 @@ public class AsteroidHit extends Entity implements Interactable, PointableEntity
 
     public float fixState = 0;
     public float fixDelay = 4;
+    public float particleTimer = 0;
+    public float particleDelay = 0.05f;
 
     public AsteroidHit() {
         this.z = -1;
@@ -21,6 +23,14 @@ public class AsteroidHit extends Entity implements Interactable, PointableEntity
         if (this.fixState >= 1) {
             this.remove = true;
             this.level.gameScreen.hud.addMessage("Asteroid hole patched.");
+        }
+
+        particleTimer = Util.stepTo(particleTimer, 0, delta);
+        if (particleTimer == 0) {
+            particleTimer = particleDelay;
+            float dist = 2;
+            float randomDirection = Util.randomRange(0, (float) (2 * Math.PI));
+            level.addEntity(new AirParticle(this), (float) (x + dist * Math.cos(randomDirection)), (float) (y + dist * Math.sin(randomDirection)));
         }
     }
 
