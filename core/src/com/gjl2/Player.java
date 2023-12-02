@@ -20,7 +20,6 @@ public class Player extends Entity {
     float idleTimer = 0;
     float animationTimer = 0;
     int animationFrame = 0;
-    float health = 100;
     int ammo = 100;
     boolean isPlayerBeingDamaged = false;
 
@@ -107,7 +106,7 @@ public class Player extends Entity {
                 ((Interactable) other).interactHold(this, delta);
             }
         } else if (other instanceof Alien) {
-            health = Util.stepTo(health, 0, 1);
+            this.damage(1);
             if (other.x < this.x) this.ex = 5;
             if (other.x >= this.x) this.ex = -5;
             this.ey = 3;
@@ -116,6 +115,15 @@ public class Player extends Entity {
     }
 
     Affine2 affine2 = new Affine2();
+
+    @Override
+    protected void damage(int value) {
+        super.damage(value);
+        if (!level.gameOver) {
+            Assets.hitSound.play((float) Main.VOLUME);
+        }
+    }
+
     @Override
     public void renderSprites(SpriteBatch spriteBatch) {
         if(isPlayerBeingDamaged) spriteBatch.setColor(Color.RED);

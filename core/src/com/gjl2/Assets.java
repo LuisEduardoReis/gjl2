@@ -38,6 +38,7 @@ public class Assets {
     public static BitmapFont font;
 
     public static Sound laserSound;
+    public static Sound hitSound;
     public static com.badlogic.gdx.audio.Music menuMusic;
 
     public static void createAssets() {
@@ -73,6 +74,7 @@ public class Assets {
         menuMusic.play();
 
         laserSound = Gdx.audio.newSound(Gdx.files.internal("laserShoot.wav"));
+        hitSound = Gdx.audio.newSound(Gdx.files.internal("hitHurt.wav"));
 
     }
 
