@@ -3,9 +3,10 @@ package com.gjl2;
 public class ShipState {
 
     public static final int TIME_TO_DEPLETE_OXYGEN = 30;
-    public static final float SHIP_SPEED = 10f / 300;
+    public static final float SHIP_SPEED = 10f / 120;
     public static final float TIME_TO_REGENERATE_SHIELD = 10f;
     private static final float ENGINE_BLOWUP_DELAY = 30;
+    public static final int INITIAL_DISTANCE_TO_EARTH = 10;
 
     public final Level level;
     public float oxygenLevel = 100;
@@ -15,7 +16,7 @@ public class ShipState {
     public boolean engineOverloaded = false;
     public float engineBlowupTimer = ENGINE_BLOWUP_DELAY;
 
-    public float distanceToEarth = 10;
+    public float distanceToEarth = INITIAL_DISTANCE_TO_EARTH;
 
     ShipState(Level level) {
         this.level = level;
@@ -29,9 +30,7 @@ public class ShipState {
                 level.gameScreen.hud.addWarning("Oxygen level critical!");
             }
         }
-        if (lost) {
-            distanceToEarth += SHIP_SPEED * delta;
-        } else {
+        if (!lost) {
             distanceToEarth = Util.stepTo( distanceToEarth, 0, SHIP_SPEED * delta);
         }
         if (engineOverloaded) {

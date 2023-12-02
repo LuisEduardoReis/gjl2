@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.gjl2.ShipState.INITIAL_DISTANCE_TO_EARTH;
 import static com.gjl2.Util.isBetween;
 
 public class GameEvents {
@@ -31,7 +32,7 @@ public class GameEvents {
         timeToEvent = Util.stepTo(timeToEvent, 0, 1*delta);
         if (timeToEvent == 0) {
             rollEvent();
-            timeToEvent =  Util.randomRange(15, 30);
+            timeToEvent =  Util.mapValue(level.shipState.distanceToEarth, 0,INITIAL_DISTANCE_TO_EARTH, 3, 12);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) this.rollEvent();
