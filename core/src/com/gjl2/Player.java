@@ -17,7 +17,7 @@ public class Player extends Entity {
     float idleTimer = 0;
     float animationTimer = 0;
     int animationFrame = 0;
-    int health = 500;
+    int health = 100;
     int ammo = 0;
     boolean isPlayerBeingDamaged = false;
 

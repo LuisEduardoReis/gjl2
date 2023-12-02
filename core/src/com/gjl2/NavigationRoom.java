@@ -10,7 +10,7 @@ public class NavigationRoom extends Entity implements Interactable, PointableEnt
     private static final float MAX_LOST_DELAY = 60;
     private static final float FIX_DELAY = 4;
     float fixState = 0;
-    float lostTimer = 0;
+    float lostTimer = 60;
 
     NavigationRoom() {
         radius = 0.75f;
