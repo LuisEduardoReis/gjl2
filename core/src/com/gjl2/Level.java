@@ -193,28 +193,37 @@ public class Level {
                 entity.y = entity.py;
                 entity.vy = 0;
                 entity.vx = 0;
+
             }
 
             if (entity.isTileSolid(getTile(xc - 1, yc)) && xr < entity.radius) {
                 xr = entity.radius;
                 entity.vx = 0;
                 entity.x = xc + xr;
+
+                entity.handleLevelCollision(-1, 0);
             }
             if (entity.isTileSolid(getTile(xc + 1, yc)) && xr > 1 - entity.radius) {
                 xr = 1 - entity.radius;
                 entity.vx = 0;
                 entity.x = xc + xr;
+
+                entity.handleLevelCollision(+1, 0);
             }
 
             if (entity.isTileSolid(getTile(xc, yc - 1)) && yr < entity.radius) {
                 yr = entity.radius;
                 entity.vy = 0;
                 entity.y = yc + yr;
+
+                entity.handleLevelCollision(0, +1);
             }
             if (entity.isTileSolid(getTile(xc, yc + 1)) && yr > 1 - entity.radius) {
                 yr = 1 - entity.radius;
                 entity.vy = 0;
                 entity.y = yc + yr;
+
+                entity.handleLevelCollision(0, 1);
             }
         }
     }

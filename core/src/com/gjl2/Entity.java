@@ -59,4 +59,7 @@ public class Entity {
             return tile.type.solid;
         }
     }
+
+    public void handleLevelCollision(float x, float y){
+    }
 }

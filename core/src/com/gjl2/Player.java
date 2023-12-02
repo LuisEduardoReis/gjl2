@@ -18,6 +18,8 @@ public class Player extends Entity {
     float animationTimer = 0;
     int animationFrame = 0;
 
+    int health = 5;
+
     Interactable currentInteractable = null;
 
     Player() {
@@ -83,6 +85,8 @@ public class Player extends Entity {
             } else if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 ((Interactable) other).interactHold(this, delta);
             }
+        }else if (other instanceof Alien){
+
         }
     }
 

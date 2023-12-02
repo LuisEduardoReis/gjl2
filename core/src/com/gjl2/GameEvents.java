@@ -22,6 +22,7 @@ public class GameEvents {
         timeToEvent = 1000000f;
 
         events.add(this::asteroidEvent);
+        events.add(this::eventAlienInvasion);
     }
 
     public void update(float delta){
@@ -43,6 +44,7 @@ public class GameEvents {
                 timeToNextAsteroid = -1;
             }
         }
+
     }
 
     private void rollEvent(){
@@ -78,6 +80,26 @@ public class GameEvents {
                 this.level.shipState.hullStatus = Math.max(0, this.level.shipState.hullStatus - 10);
                 break;
             }
+        }
+    }
+
+    private void eventAlienInvasion(){
+        for (int i = 0; i < 100; i++) {
+            float x = (float) (Math.floor(Util.randomRange(0, this.level.width)) + 0.5f);
+            float y = (float) (Math.floor(Util.randomRange(0, this.level.height)) + 0.5f);
+
+            Tile tile = this.level.getTile(x,y);
+            if (tile.type != TileType.getTileType("room")) continue;
+
+            Tile tileBelow = this.level.getTile(x,y - 1);
+            if (!tileBelow.type.solid) continue;
+
+            Tile overlayTile = this.level.getTileOverlay(x,y);
+            if (overlayTile.type != null) continue;
+
+            this.level.gameScreen.hud.addWarning("Alien invaded!");
+            this.level.addEntity(new Alien(), x,y);
+            break;
         }
     }
 }
