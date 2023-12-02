@@ -151,7 +151,7 @@ public class Level {
             this.entities = this.entities.stream().filter(e -> !e.remove).collect(Collectors.toList());
         }
 
-        if (this.shipState.hullStatus == 0 || this.shipState.oxygenLevel == 0) {
+        if (this.shipState.hullStatus == 0 || this.shipState.oxygenLevel == 0 || this.player.health == 0) {
             gameOver = true;
         }
 
