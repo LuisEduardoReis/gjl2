@@ -17,7 +17,7 @@ public class Player extends Entity {
     float idleTimer = 0;
     float animationTimer = 0;
     int animationFrame = 0;
-    int health = 100;
+    float health = 100;
     int ammo = 100;
     boolean isPlayerBeingDamaged = false;
 
@@ -93,7 +93,7 @@ public class Player extends Entity {
             } else if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 ((Interactable) other).interactHold(this, delta);
             }
-        }else if (other instanceof Alien){
+        } else if (other instanceof Alien){
             health = Util.stepTo(health, 0, 1);
             if (other.x < this.x) this.ex = 5;
             if (other.x >= this.x) this.ex = -5;
