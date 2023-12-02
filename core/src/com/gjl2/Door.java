@@ -15,9 +15,12 @@ public class Door extends Entity implements Interactable {
     @Override
     void update(float delta) {
         float distToPlayer = Util.pointDistance(this.x, this.y, this.level.player.x, this.level.player.y);
-        if (distToPlayer > 3) this.open = false;
+        if (distToPlayer > 3 && this.open) {
+            level.gameScreen.playSound(Assets.doorCloseSound, 0.5f);
+            this.open = false;
+        }
 
-        this.openState = Util.stepTo(this.openState, this.open ? 1 : 0, 2 * delta);
+        this.openState = Util.stepTo(this.openState, this.open ? 1 : 0, delta / 0.35f);
     }
 
     @Override
@@ -28,7 +31,13 @@ public class Door extends Entity implements Interactable {
     @Override
     public void interact(Player player) {
         if (Math.floor(player.x) != Math.floor(this.x) || Math.floor(player.y) != Math.floor(this.y)) {
-            this.open = !this.open;
+            if (!this.open) {
+                this.open = true;
+                level.gameScreen.playSound(Assets.doorOpenSound, 0.5f);
+            } else {
+                this.open = false;
+                level.gameScreen.playSound(Assets.doorCloseSound, 0.5f);
+            }
         }
     }
 

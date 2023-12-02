@@ -41,7 +41,10 @@ public class Assets {
     public static Sound hitSound;
     public static Sound explosionSound;
     public static Sound alarmSound;
-    public static Sound alienDieSound;
+    public static Sound shieldsUpSound;
+    public static Sound doorOpenSound;
+    public static Sound doorCloseSound;
+    public static Sound teleportSound;
     public static com.badlogic.gdx.audio.Music menuMusic;
 
     public static void createAssets() {
@@ -74,13 +77,16 @@ public class Assets {
 
         menuMusic = Gdx.audio.newMusic(Gdx.files.internal("iamnotok.mp3"));
         menuMusic.setLooping(true);
-        //menuMusic.play();
+        menuMusic.play();
 
         alarmSound = Gdx.audio.newSound(Gdx.files.internal("alarm.wav"));
         laserSound = Gdx.audio.newSound(Gdx.files.internal("laserShoot.wav"));
         hitSound = Gdx.audio.newSound(Gdx.files.internal("hitHurt.wav"));
         explosionSound = Gdx.audio.newSound(Gdx.files.internal("explosion.wav"));
-        alienDieSound = Gdx.audio.newSound(Gdx.files.internal("alienDie.wav"));
+        shieldsUpSound = Gdx.audio.newSound(Gdx.files.internal("shieldsUp.wav"));
+        doorOpenSound = Gdx.audio.newSound(Gdx.files.internal("doorOpen.wav"));
+        doorCloseSound = Gdx.audio.newSound(Gdx.files.internal("doorClose.wav"));
+        teleportSound = Gdx.audio.newSound(Gdx.files.internal("teleport.wav"));
     }
 
     static TextureRegion getTileTextureById(int id) {

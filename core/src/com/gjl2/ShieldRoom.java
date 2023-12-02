@@ -11,6 +11,7 @@ public class ShieldRoom extends Entity implements Interactable {
         if (level.shipState.shieldState < 100) {
             level.shipState.shieldState = Util.stepTo(level.shipState.shieldState, 100, delta * 100 / ShipState.TIME_TO_REGENERATE_SHIELD);
             if (level.shipState.shieldState == 100) {
+                this.level.gameScreen.playSound(Assets.shieldsUpSound);
                 this.level.gameScreen.hud.addMessage("Shield replenished");
             }
         }

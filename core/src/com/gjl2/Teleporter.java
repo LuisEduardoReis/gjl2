@@ -15,6 +15,7 @@ public class Teleporter extends Entity implements Interactable {
     }
     @Override
     public void interact(Player player) {
+        level.gameScreen.playSound(Assets.teleportSound);
         player.teleport(linkedTeleporter.x, linkedTeleporter.y);
     }
 

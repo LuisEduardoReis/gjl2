@@ -136,7 +136,6 @@ public class Level {
                 addEntity(tp2, ox, oy);
             }
         }
-
         tp1.linkTeleporter(tp2);
         tp2.linkTeleporter(tp1);
     }
