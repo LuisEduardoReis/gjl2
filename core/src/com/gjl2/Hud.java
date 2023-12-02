@@ -107,7 +107,7 @@ public class Hud {
             font.draw(spriteBatch, String.format("Earth %.1f ly", level.shipState.distanceToEarth), 25, 280);
         }
 
-
+        font.setColor(level.shipState.hullStatus < 30 ? Color.RED : Color.GREEN);
         font.draw(spriteBatch, String.format("Hull status %d%%", level.shipState.hullStatus), 25, 210);
 
         font.setColor(level.shipState.isOxygenCritical() ? Color.RED : Color.GREEN);
