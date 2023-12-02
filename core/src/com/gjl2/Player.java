@@ -86,7 +86,7 @@ public class Player extends Entity {
                 ((Interactable) other).interactHold(this, delta);
             }
         }else if (other instanceof Alien){
-            health--;
+            health = (int) Math.max(0, health -1);
         }
     }
 
