@@ -50,6 +50,6 @@ public class EngineRoom extends Entity implements Interactable, PointableEntity 
 
     @Override
     public String getHoverMessage() {
-        return level.shipState.engineOverloaded ? "Press space to reset engine" : null;
+        return level.shipState.engineOverloaded ? "Press " + GameKeys.INTERACT_KEY_NAME + " to reset engine" : null;
     }
 }

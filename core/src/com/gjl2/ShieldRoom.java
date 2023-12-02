@@ -19,7 +19,7 @@ public class ShieldRoom extends Entity implements Interactable {
 
     @Override
     public String getHoverMessage() {
-        return level.shipState.shieldState < 100 ? "Press space to replenish shields" : null;
+        return level.shipState.shieldState < 100 ? "Press " + GameKeys.INTERACT_KEY_NAME + " to replenish shields" : null;
     }
 }
 

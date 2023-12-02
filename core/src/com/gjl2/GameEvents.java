@@ -35,7 +35,7 @@ public class GameEvents {
             timeToEvent =  Util.mapValue(level.shipState.distanceToEarth, 0,INITIAL_DISTANCE_TO_EARTH, 3, 12);
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) this.rollEvent();
+        if (Gdx.input.isKeyJustPressed(GameKeys.DEBUG_EVENT)) this.rollEvent();
         for (Timer t : timers) {
             t.update(delta);
         }

@@ -57,6 +57,6 @@ public class AsteroidHit extends Entity implements Interactable, PointableEntity
 
     @Override
     public String getHoverMessage() {
-        return "Press space to fix hole";
+        return "Press " + GameKeys.INTERACT_KEY_NAME + " to fix hole";
     }
 }

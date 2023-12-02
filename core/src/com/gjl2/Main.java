@@ -30,10 +30,10 @@ public class Main extends Game {
 	@Override
 	public void render() {
 		super.render();
-		if (Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
+		if (Gdx.input.isKeyJustPressed(GameKeys.DEBUG)) {
 			DEBUG = !DEBUG;
 		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.F2)) {
+		if (Gdx.input.isKeyJustPressed(GameKeys.MUTE)) {
 			MUTE = !MUTE;
 		}
 		if (MUTE){

@@ -35,12 +35,12 @@ public class Player extends Entity {
         isClimbing = false;
         float velocity = 5;
         float jumpVelocity = 5;
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        if (Gdx.input.isKeyPressed(GameKeys.LEFT)) {
             this.x -= velocity * delta;
             this.goingRight = false;
             this.idleTimer = IDLE_DELAY;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        if (Gdx.input.isKeyPressed(GameKeys.RIGHT)) {
             this.x += velocity * delta;
             this.goingRight = true;
             this.idleTimer = IDLE_DELAY;
@@ -50,22 +50,22 @@ public class Player extends Entity {
         if (currentTile.type.ladder) {
             this.vy = 0;
             this.hasGravity = false;
-            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (Gdx.input.isKeyPressed(GameKeys.UP)) {
                 this.y += velocity * delta;
                 isClimbing = true;
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            if (Gdx.input.isKeyPressed(GameKeys.DOWN)) {
                 this.y -= velocity * delta;
                 isClimbing = true;
             }
         } else {
             this.hasGravity = true;
-            if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && this.vy == 0) {
+            if (Gdx.input.isKeyJustPressed(GameKeys.UP) && this.vy == 0) {
                 this.vy = jumpVelocity;
             }
         }
 
-        if (ammo > 0 && Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && currentInteractable == null) {
+        if (ammo > 0 && Gdx.input.isKeyJustPressed(GameKeys.FIRE)) {
             ammo--;
             Bullet bullet = new Bullet();
             bullet.vx = 10 * (goingRight ? 1 : -1);
@@ -89,9 +89,9 @@ public class Player extends Entity {
     void collide(Entity other, float delta) {
         if (other instanceof Interactable) {
             currentInteractable = (Interactable) other;
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            if (Gdx.input.isKeyJustPressed(GameKeys.INTERACT)) {
                 ((Interactable) other).interact(this);
-            } else if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            } else if (Gdx.input.isKeyPressed(GameKeys.INTERACT)) {
                 ((Interactable) other).interactHold(this, delta);
             }
         } else if (other instanceof Alien){
@@ -149,7 +149,7 @@ public class Player extends Entity {
     public boolean isTileSolid(Tile tile) {
         if (tile.type.ladder) {
             Tile tileAt = this.level.getTile(this.x, this.y);
-            return !tileAt.type.ladder && this.y > tile.y + 1 && !Gdx.input.isKeyPressed(Input.Keys.DOWN);
+            return !tileAt.type.ladder && this.y > tile.y + 1 && !Gdx.input.isKeyPressed(GameKeys.DOWN);
         } else {
             return super.isTileSolid(tile);
         }

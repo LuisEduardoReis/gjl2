@@ -4,7 +4,7 @@ public class ShipState {
 
     public static final int TIME_TO_DEPLETE_OXYGEN = 30;
     public static final float SHIP_SPEED = 10f / 120;
-    public static final float TIME_TO_REGENERATE_SHIELD = 10f;
+    public static final float TIME_TO_REGENERATE_SHIELD = 5f;
     private static final float ENGINE_BLOWUP_DELAY = 30;
     public static final int INITIAL_DISTANCE_TO_EARTH = 10;
 

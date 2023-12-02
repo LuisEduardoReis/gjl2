@@ -34,6 +34,6 @@ public class Door extends Entity implements Interactable {
 
     @Override
     public String getHoverMessage() {
-        return "Press space to open";
+        return "Press " + GameKeys.INTERACT_KEY_NAME + " to open";
     }
 }
