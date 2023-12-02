@@ -22,6 +22,8 @@ public class GameScreen extends ScreenAdapter {
     OrthographicCamera camera;
     Viewport viewport;
 
+    float cameraScale = 12f / Main.WIDTH;
+
 
     GameScreen() {
         this.spriteBatch = new SpriteBatch();
@@ -42,7 +44,7 @@ public class GameScreen extends ScreenAdapter {
         ScreenUtils.clear(0,0,0,1);
         this.viewport.apply();
         this.camera.position.set(level.player.x, level.player.y, 0);
-        this.camera.zoom = (float) 12 / Main.WIDTH;
+        this.camera.zoom = cameraScale;
         this.camera.update();
 
         this.spriteBatch.setProjectionMatrix(camera.combined);
@@ -67,6 +69,10 @@ public class GameScreen extends ScreenAdapter {
         this.camera.update();
         this.spriteBatch.setProjectionMatrix(camera.combined);
         this.shapeRenderer.setProjectionMatrix(camera.combined);
+
+        this.spriteBatch.begin();
+        this.hud.renderSprites(spriteBatch);
+        this.spriteBatch.end();
 
         Util.enableBlending();
         this.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);

@@ -3,6 +3,7 @@ package com.gjl2;
 public class ShipState {
 
     public static final int MAX_SHIELD_HITS = 3;
+    public static final int TIME_TO_DEPLETE_OXYGEN = 30;
     public final Level level;
     public float oxygenLevel = 100;
     public int shieldHits = 0;
@@ -14,7 +15,7 @@ public class ShipState {
 
     public void update(float delta) {
         if (hasAsteroidHits()) {
-            oxygenLevel = Util.stepTo(oxygenLevel, 0, delta * 100 / 150);
+            oxygenLevel = Util.stepTo(oxygenLevel, 0, delta * 100 / TIME_TO_DEPLETE_OXYGEN);
         }
     }
 
@@ -23,7 +24,7 @@ public class ShipState {
     }
 
     public boolean isOxygenCritical() {
-        return this.oxygenLevel < 0.3;
+        return this.oxygenLevel < 50;
     }
 
     public boolean isAlarmOn() {

@@ -14,7 +14,7 @@ public class GameEvents {
     List<Runnable> events = new LinkedList<>();
     List<Timer> timers = new LinkedList<>();
 
-    float timeToNextAsteroid = -1;
+    float timeToNextAsteroid = 1;
 
     float timeToEvent;
     public GameEvents(Level level) {

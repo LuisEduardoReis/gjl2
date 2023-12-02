@@ -25,7 +25,8 @@ public class Assets {
     public static List<TextureRegion> playerClimbing = new ArrayList<>(2);
 //    public static TextureRegion playerBack;
     public static TextureRegion asteroidHitSprite;
-    public static TextureRegion toolboxSprite;
+    public static TextureRegion arrowSprite;
+    public static TextureRegion oxygenSprite;
 
     public static BitmapFont font;
 
@@ -46,7 +47,8 @@ public class Assets {
         playerClimbing.add(spriteTextures[0][5]);
         playerClimbing.add(spriteTextures[0][6]);
         asteroidHitSprite = spriteTextures[1][0];
-        toolboxSprite = spriteTextures[1][1];
+        arrowSprite = spriteTextures[1][1];
+        oxygenSprite = tileTextures[0][4];
     }
 
     static TextureRegion getTileTextureById(int id) {

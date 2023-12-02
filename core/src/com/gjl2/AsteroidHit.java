@@ -2,9 +2,10 @@ package com.gjl2;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class AsteroidHit extends Entity implements Interactable {
+public class AsteroidHit extends Entity implements Interactable, PointableEntity {
 
     public float fixState = 0;
     public float fixDelay = 4;
@@ -37,5 +38,10 @@ public class AsteroidHit extends Entity implements Interactable {
     @Override
     public void interactHold(Player player, float delta) {
         this.fixState = Util.stepTo(fixState, 1, delta / fixDelay);
+    }
+
+    @Override
+    public TextureRegion getIcon() {
+        return Assets.asteroidHitSprite;
     }
 }

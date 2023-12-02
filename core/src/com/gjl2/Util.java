@@ -44,7 +44,7 @@ public class Util {
         return (float) (a + Math.random() * (b - a));
     }
 
-    public static boolean isBetween(int x, int lower, int upper) {
+    public static boolean isBetween(float x, float lower, float upper) {
         return lower <= x && x <= upper;
     }
 
