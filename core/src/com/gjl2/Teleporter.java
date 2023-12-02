@@ -14,10 +14,8 @@ public class Teleporter extends Entity implements Interactable {
         linkedTeleporter = t;
     }
     @Override
-    public void interactHold(Player player, float delta) {
-        if (linkedTeleporter == null) return; //should not happen
-        player.x = linkedTeleporter.x;
-        player.y = linkedTeleporter.y;
+    public void interact(Player player) {
+        player.teleport(linkedTeleporter.x, linkedTeleporter.y);
     }
 
     @Override

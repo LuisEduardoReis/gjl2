@@ -102,7 +102,11 @@ public class Hud {
         }
 
         if (this.gameScreen.level.gameOver) {
-            shapeRenderer.setColor(0.5f, 0, 0, 1);
+            if (!this.gameScreen.level.gameWon) {
+                shapeRenderer.setColor(0.5f, 0, 0, 1);
+            } else {
+                shapeRenderer.setColor(0, 0.5f, 0, 1);
+            }
             shapeRenderer.rect(0, 0, Main.WIDTH, Main.HEIGHT);
         }
     }
@@ -165,13 +169,20 @@ public class Hud {
         }
 
         if (level.gameOver) {
-
-            font.setColor(Color.WHITE);
-            font.getData().setScale(4f);
-            Util.drawTextCentered(spriteBatch, font, "GAME OVER", Main.WIDTH / 2f, Main.HEIGHT * 0.8f);
-            font.getData().setScale(2f);
-            Util.drawTextCentered(spriteBatch, font, level.gameOverReason, Main.WIDTH / 2f, Main.HEIGHT * 0.2f);
-            renderAvatar(spriteBatch);
+            if (!level.gameWon) {
+                font.setColor(Color.WHITE);
+                font.getData().setScale(4f);
+                Util.drawTextCentered(spriteBatch, font, "GAME OVER", Main.WIDTH / 2f, Main.HEIGHT * 0.8f);
+                font.getData().setScale(2f);
+                Util.drawTextCentered(spriteBatch, font, level.gameOverReason, Main.WIDTH / 2f, Main.HEIGHT * 0.2f);
+                renderAvatar(spriteBatch);
+            } else {
+                font.setColor(Color.WHITE);
+                font.getData().setScale(4f);
+                Util.drawTextCentered(spriteBatch, font, "YOU WIN!", Main.WIDTH / 2f, Main.HEIGHT / 2f);
+                font.getData().setScale(2f);
+                Util.drawTextCentered(spriteBatch, font, level.gameOverReason, Main.WIDTH / 2f, Main.HEIGHT * 0.4f);
+            }
         }
     }
 

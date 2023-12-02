@@ -36,7 +36,8 @@ public class Level {
 
     ShipState shipState;
 
-    public boolean gameOver;
+    public boolean gameOver = false;
+    public boolean gameWon = false;
     public String gameOverReason = "You died somehow...";
 
     public Teleporter tp1;
@@ -164,6 +165,10 @@ public class Level {
 
         handleEntityCollisions(delta);
         handleLevelCollisions();
+
+        for (Entity entity : this.entities) {
+            entity.postupdate(delta);
+        }
 
         if (this.entities.stream().anyMatch(e -> e.remove)) {
             this.entities = this.entities.stream().filter(e -> !e.remove).collect(Collectors.toList());
@@ -307,8 +312,14 @@ public class Level {
         return getTileOverlay((int) Math.floor(x), (int) Math.floor(y));
     }
 
+    public void endGame(String reason, boolean won) {
+        if (!gameOver) {
+            gameOver = true;
+            gameWon = won;
+            gameOverReason = reason;
+        }
+    }
     public void endGame(String reason) {
-        gameOver = true;
-        gameOverReason = reason;
+        endGame(reason, false);
     }
 }

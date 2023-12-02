@@ -53,6 +53,9 @@ public class Entity {
         }
     }
 
+    public void postupdate(float delta) {
+    }
+
     void collide(Entity other,float delta) {}
 
     public void renderSprites(SpriteBatch spriteBatch) {

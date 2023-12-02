@@ -6,7 +6,7 @@ public class ShipState {
     public static final float SHIP_SPEED = 10f / 120;
     public static final float TIME_TO_REGENERATE_SHIELD = 5f;
     private static final float ENGINE_BLOWUP_DELAY = 30;
-    public static final int INITIAL_DISTANCE_TO_EARTH = 10;
+    public static final float INITIAL_DISTANCE_TO_EARTH = 10f;
 
     public final Level level;
     public float oxygenLevel = 100;
@@ -31,6 +31,9 @@ public class ShipState {
         }
         if (!lost) {
             distanceToEarth = Util.stepTo( distanceToEarth, 0, SHIP_SPEED * delta);
+            if (distanceToEarth == 0) {
+                level.endGame("You reached earth safely", true);
+            }
         }
         if (engineOverloaded) {
             engineBlowupTimer = Util.stepTo(engineBlowupTimer, 0, delta);

@@ -6,12 +6,15 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Affine2;
+import com.badlogic.gdx.math.Vector;
+import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Entity {
 
     public static float IDLE_DELAY = 0.2f;
     public static float ANIMATION_DELAY = 0.1f;
 
+    Vector2 teleport = null;
     boolean goingRight = true;
     boolean isClimbing = false;
     float idleTimer = 0;
@@ -86,6 +89,15 @@ public class Player extends Entity {
     }
 
     @Override
+    public void postupdate(float delta) {
+        if (teleport != null) {
+            x = teleport.x;
+            y = teleport.y;
+            teleport = null;
+        }
+    }
+
+    @Override
     void collide(Entity other, float delta) {
         if (other instanceof Interactable) {
             currentInteractable = (Interactable) other;
@@ -94,7 +106,7 @@ public class Player extends Entity {
             } else if (Gdx.input.isKeyPressed(GameKeys.INTERACT)) {
                 ((Interactable) other).interactHold(this, delta);
             }
-        } else if (other instanceof Alien){
+        } else if (other instanceof Alien) {
             health = Util.stepTo(health, 0, 1);
             if (other.x < this.x) this.ex = 5;
             if (other.x >= this.x) this.ex = -5;
@@ -157,5 +169,9 @@ public class Player extends Entity {
 
     public boolean isMoving() {
         return idleTimer != 0;
+    }
+
+    public void teleport(float x, float y) {
+        teleport = new Vector2(x,y);
     }
 }
