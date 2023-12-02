@@ -163,6 +163,11 @@ public class Hud {
 
     private void renderAvatar(SpriteBatch spriteBatch) {
         int scaleAvatar = 400;
-        spriteBatch.draw(Assets.playerGameOver, Main.WIDTH / 2 - scaleAvatar / 2, Main.HEIGHT / 2 - scaleAvatar / 2, scaleAvatar, scaleAvatar);
+        Util.affine2.idt();
+        Util.affine2.translate((float) Main.WIDTH / 2, (float) Main.HEIGHT /2);
+        Util.affine2.scale(-1, 1);
+        Util.affine2.translate(- scaleAvatar / 2f, - scaleAvatar / 2f);
+
+        spriteBatch.draw(Assets.playerGameOver, scaleAvatar, scaleAvatar, Util.affine2);
     }
 }
