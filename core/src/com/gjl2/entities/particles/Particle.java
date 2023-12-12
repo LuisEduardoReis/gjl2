@@ -1,14 +1,15 @@
-package com.gjl2;
+package com.gjl2.entities.particles;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.gjl2.Util;
+import com.gjl2.entities.Entity;
 
 public class Particle extends Entity {
 
     public Color color;
-    float ttl = 1;
-    public
-    float size;
+    public float ttl = 1;
+    public float size;
 
     public Particle() {
         radius = 0.05f;
@@ -17,7 +18,7 @@ public class Particle extends Entity {
     }
 
     @Override
-    void update(float delta) {
+    public void update(float delta) {
         super.update(delta);
         ttl = Util.stepTo(ttl, 0, delta);
         if (ttl == 0) {

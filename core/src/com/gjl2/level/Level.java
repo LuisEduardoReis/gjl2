@@ -1,4 +1,4 @@
-package com.gjl2;
+package com.gjl2.level;
 
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,32 +9,40 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector3;
+import com.gjl2.*;
+import com.gjl2.entities.*;
+import com.gjl2.entities.interactables.Door;
+import com.gjl2.entities.interactables.Teleporter;
+import com.gjl2.entities.rooms.EngineRoom;
+import com.gjl2.entities.rooms.NavigationRoom;
+import com.gjl2.entities.rooms.OxygenRoom;
+import com.gjl2.entities.rooms.ShieldRoom;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.gjl2.TileType.*;
+import static com.gjl2.level.TileType.*;
 
 public class Level {
 
     public static final int NUM_STARS = 2000;
     public static final int STARS_BOUNDARY = 6;
-    GameScreen gameScreen;
-    Player player;
-    List<Entity> entities;
-    List<Entity> newEntities;
-    List<Vector3> stars = new ArrayList<>(NUM_STARS);
+    public GameScreen gameScreen;
+    public Player player;
+    public List<Entity> entities;
+    public List<Entity> newEntities;
+    public List<Vector3> stars = new ArrayList<>(NUM_STARS);
 
     public int width, height;
-    Tile[] tiles;
-    Tile[] overlayTiles;
-    Tile boundaryTile;
+    public Tile[] tiles;
+    public Tile[] overlayTiles;
+    public Tile boundaryTile;
 
-    GameEvents gameEvents;
+    public GameEvents gameEvents;
 
-    ShipState shipState;
+    public ShipState shipState;
 
     public boolean gameOver = false;
     public boolean gameWon = false;
@@ -43,7 +51,7 @@ public class Level {
     public Teleporter tp1;
     public Teleporter tp2;
 
-    Level(GameScreen gameScreen) {
+    public Level(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
 
         this.gameEvents = new GameEvents(this);

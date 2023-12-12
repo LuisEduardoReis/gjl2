@@ -1,4 +1,6 @@
-package com.gjl2;
+package com.gjl2.entities.interactables;
+
+import com.gjl2.entities.Player;
 
 public interface Interactable {
     default void interact(Player player) {};

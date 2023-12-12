@@ -1,18 +1,20 @@
-package com.gjl2;
+package com.gjl2.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.gjl2.Assets;
+import com.gjl2.Util;
 
 public class Engine extends Entity {
-    private float flameState=3;
-    private int animationIndex=3;
-    Engine(float x, float y) {
+    public float flameState=3;
+    public int animationIndex=3;
+    public Engine(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
-    void update(float delta) {
+    public void update(float delta) {
         flameState = Util.stepTo(flameState, 0, delta*15);
         //flameState-= .25F;
         if (flameState == 0){

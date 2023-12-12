@@ -1,4 +1,4 @@
-package com.gjl2;
+package com.gjl2.level;
 
 import java.util.HashMap;
 import java.util.Map;

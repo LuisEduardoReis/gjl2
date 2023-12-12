@@ -96,7 +96,7 @@ public class Assets {
         teleportSound = Gdx.audio.newSound(Gdx.files.internal("teleport.wav"));
     }
 
-    static TextureRegion getTileTextureById(int id) {
+    public static TextureRegion getTileTextureById(int id) {
        return tileTextures[id / tileTextures.length][id % tileTextures.length];
     }
 }

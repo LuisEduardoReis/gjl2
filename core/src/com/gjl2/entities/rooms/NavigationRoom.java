@@ -1,19 +1,24 @@
-package com.gjl2;
+package com.gjl2.entities.rooms;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.gjl2.*;
+import com.gjl2.entities.Entity;
+import com.gjl2.entities.interactables.Interactable;
+import com.gjl2.entities.Player;
+import com.gjl2.entities.PointableEntity;
 
 public class NavigationRoom extends Entity implements Interactable, PointableEntity {
     private static final float FIX_DELAY = 4;
     float fixState = 0;
 
-    NavigationRoom() {
+    public NavigationRoom() {
         radius = 0.75f;
     }
 
     @Override
-    void update(float delta) {
+    public void update(float delta) {
         if (level.shipState.lost) {
             if (fixState == 1){
                 level.shipState.lost = false;

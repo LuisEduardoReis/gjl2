@@ -1,6 +1,11 @@
-package com.gjl2;
+package com.gjl2.entities.rooms;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.gjl2.*;
+import com.gjl2.entities.Entity;
+import com.gjl2.entities.interactables.Interactable;
+import com.gjl2.entities.Player;
+import com.gjl2.entities.PointableEntity;
 
 public class OxygenRoom extends Entity implements PointableEntity, Interactable {
 
@@ -12,7 +17,7 @@ public class OxygenRoom extends Entity implements PointableEntity, Interactable 
 
 
     @Override
-    void update(float delta) {
+    public void update(float delta) {
     }
 
     @Override

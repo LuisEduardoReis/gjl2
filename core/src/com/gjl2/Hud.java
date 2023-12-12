@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Affine2;
+import com.gjl2.entities.PointableEntity;
+import com.gjl2.level.Level;
 import text.formic.Stringf;
 
 import java.util.LinkedList;

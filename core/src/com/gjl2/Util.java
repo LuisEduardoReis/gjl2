@@ -57,5 +57,5 @@ public class Util {
 
     public static float mapValue(float v, float a1, float b1, float a2, float b2) {
         return a2 + (b2 - a2) * ((v - a1) / (b1 - a1));
-    };
+    }
 }

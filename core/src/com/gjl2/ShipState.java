@@ -1,5 +1,8 @@
 package com.gjl2;
 
+import com.gjl2.entities.interactables.AsteroidHit;
+import com.gjl2.level.Level;
+
 public class ShipState {
 
     public static final int TIME_TO_DEPLETE_OXYGEN = 30;
@@ -20,7 +23,7 @@ public class ShipState {
     public float alarmSoundTimer = 0;
     public float alarmSoundDelay = 2f;
 
-    ShipState(Level level) {
+    public ShipState(Level level) {
         this.level = level;
     }
 

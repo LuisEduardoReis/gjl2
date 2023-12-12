@@ -1,4 +1,4 @@
-package com.gjl2;
+package com.gjl2.entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 

@@ -1,13 +1,15 @@
-package com.gjl2;
+package com.gjl2.entities.particles;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.gjl2.Assets;
+import com.gjl2.Util;
 
 public class AlienChunkParticle extends Particle {
 
-    float rotation = Util.randomRange(0, 360);
-    boolean rotating = true;
+    public float rotation = Util.randomRange(0, 360);
+    public boolean rotating = true;
 
     public AlienChunkParticle() {
         super();
@@ -21,7 +23,7 @@ public class AlienChunkParticle extends Particle {
     }
 
     @Override
-    void update(float delta) {
+    public void update(float delta) {
         super.update(delta);
 
         if (rotating) rotation += delta * 360;

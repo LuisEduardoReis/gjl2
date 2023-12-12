@@ -1,21 +1,20 @@
-package com.gjl2;
+package com.gjl2.entities;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Affine2;
+import com.gjl2.Assets;
+import com.gjl2.Util;
+import com.gjl2.entities.particles.AlienChunkParticle;
 
-public class Alien extends Entity{
+public class Alien extends Entity {
 
-    private float radius;
-    private int direction;
-    private float rotation = 0;
-    private float jumpTimer = (float) (Math.random() * 2);
-    private final float jumpDelay = 2;
+    public float radius;
+    public int direction;
+    public float rotation = 0;
+    public float jumpTimer = (float) (Math.random() * 2);
+    public final float jumpDelay = 2;
 
-    Alien() {
+    public Alien() {
         this.radius = 0.4f;
         this.hasGravity = true;
         this.collidesWithLevel = true;
@@ -26,7 +25,7 @@ public class Alien extends Entity{
     }
 
     @Override
-    void collide(Entity other, float delta) {
+    public void collide(Entity other, float delta) {
         super.collide(other, delta);
 
         if (other instanceof Alien){
@@ -41,7 +40,8 @@ public class Alien extends Entity{
         if (direction == 1) { direction = 2;} else direction = 1;
     }
 
-    void update(float delta) {
+    @Override
+    public void update(float delta) {
         float velocity = 1;
         float jumpVelocity = 5;
 

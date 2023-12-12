@@ -1,13 +1,16 @@
 package com.gjl2;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.gjl2.entities.Alien;
+import com.gjl2.entities.interactables.AsteroidHit;
+import com.gjl2.level.Level;
+import com.gjl2.level.Tile;
+import com.gjl2.level.TileType;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import static com.gjl2.ShipState.INITIAL_DISTANCE_TO_EARTH;
-import static com.gjl2.Util.isBetween;
 
 public class GameEvents {
     Level level;

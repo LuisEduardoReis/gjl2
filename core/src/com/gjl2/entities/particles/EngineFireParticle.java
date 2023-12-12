@@ -1,8 +1,10 @@
-package com.gjl2;
+package com.gjl2.entities.particles;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.gjl2.Assets;
+import com.gjl2.Util;
+import com.gjl2.entities.particles.Particle;
 
 public class EngineFireParticle extends Particle {
 
@@ -15,16 +17,6 @@ public class EngineFireParticle extends Particle {
         float speed = Util.randomRange(5,7);
         ex = (float) (speed * Math.cos(direction));
         ey = (float) (speed * Math.sin(direction));
-    }
-
-    @Override
-    void update(float delta) {
-        super.update(delta);
-    }
-
-    @Override
-    public void handleLevelCollision(float x, float y) {
-        super.handleLevelCollision(x, y);
     }
 
     @Override

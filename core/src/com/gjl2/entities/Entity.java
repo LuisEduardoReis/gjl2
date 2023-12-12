@@ -1,8 +1,11 @@
-package com.gjl2;
+package com.gjl2.entities;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.gjl2.level.Level;
+import com.gjl2.level.Tile;
+import com.gjl2.Util;
 
 public class Entity {
 
@@ -28,15 +31,15 @@ public class Entity {
     public float health = 100;
     public boolean dead = false;
 
-    Entity() {
+    public Entity() {
     }
 
-    void preupdate(float delta) {
+    public void preupdate(float delta) {
         this.px = this.x;
         this.py = this.y;
     }
 
-    void update(float delta) {
+    public void update(float delta) {
         if (this.hasGravity) {
             this.vy -= GRAVITY * delta;
         }
@@ -56,7 +59,7 @@ public class Entity {
     public void postupdate(float delta) {
     }
 
-    void collide(Entity other,float delta) {}
+    public void collide(Entity other,float delta) {}
 
     public void renderSprites(SpriteBatch spriteBatch) {
 
@@ -81,7 +84,7 @@ public class Entity {
     public void handleLevelCollision(float x, float y){
     }
 
-    protected void damage(int value) {
+    public void damage(int value) {
         health = Util.stepTo(health, 0, value);
     }
 

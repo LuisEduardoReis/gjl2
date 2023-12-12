@@ -1,6 +1,7 @@
-package com.gjl2;
+package com.gjl2.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.gjl2.Assets;
 
 public class Bullet extends Entity {
 
@@ -11,7 +12,7 @@ public class Bullet extends Entity {
     }
 
     @Override
-    void collide(Entity other, float delta) {
+    public void collide(Entity other, float delta) {
         if (other instanceof Alien) {
             remove = true;
             other.damage(50);

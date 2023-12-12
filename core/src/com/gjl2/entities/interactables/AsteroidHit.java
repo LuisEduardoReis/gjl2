@@ -1,9 +1,14 @@
-package com.gjl2;
+package com.gjl2.entities.interactables;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.gjl2.*;
+import com.gjl2.entities.Entity;
+import com.gjl2.entities.Player;
+import com.gjl2.entities.PointableEntity;
+import com.gjl2.entities.particles.AirParticle;
 
 public class AsteroidHit extends Entity implements Interactable, PointableEntity {
 
@@ -17,7 +22,7 @@ public class AsteroidHit extends Entity implements Interactable, PointableEntity
     }
 
     @Override
-    void update(float delta) {
+    public void update(float delta) {
         super.update(delta);
 
         if (this.fixState >= 1) {

@@ -1,11 +1,15 @@
-package com.gjl2;
+package com.gjl2.entities.interactables;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.gjl2.*;
+import com.gjl2.entities.Entity;
+import com.gjl2.entities.Player;
+import com.gjl2.entities.interactables.Interactable;
 
 public class Door extends Entity implements Interactable {
 
-    boolean open = false;
-    float openState = 0;
+    public boolean open = false;
+    public float openState = 0;
 
     public Door() {
         this.z = 1;
@@ -13,7 +17,7 @@ public class Door extends Entity implements Interactable {
     }
 
     @Override
-    void update(float delta) {
+    public void update(float delta) {
         float distToPlayer = Util.pointDistance(this.x, this.y, this.level.player.x, this.level.player.y);
         if (distToPlayer > 3 && this.open) {
             level.gameScreen.playSound(Assets.doorCloseSound, 0.5f);

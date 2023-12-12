@@ -1,31 +1,32 @@
-package com.gjl2;
+package com.gjl2.entities;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Affine2;
-import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
+import com.gjl2.*;
+import com.gjl2.entities.interactables.Interactable;
+import com.gjl2.level.Tile;
 
 public class Player extends Entity {
 
     public static float IDLE_DELAY = 0.2f;
     public static float ANIMATION_DELAY = 0.1f;
 
-    Vector2 teleport = null;
-    boolean goingRight = true;
-    boolean isClimbing = false;
-    float idleTimer = 0;
-    float animationTimer = 0;
-    int animationFrame = 0;
-    int ammo = 100;
-    boolean isPlayerBeingDamaged = false;
+    public Vector2 teleport = null;
+    public boolean goingRight = true;
+    public boolean isClimbing = false;
+    public float idleTimer = 0;
+    public float animationTimer = 0;
+    public int animationFrame = 0;
+    public int ammo = 100;
+    public boolean isPlayerBeingDamaged = false;
 
-    Interactable currentInteractable = null;
+    public Interactable currentInteractable = null;
 
-    Player() {
+    public Player() {
         this.radius = 0.4f;
         this.hasGravity = true;
         this.collidesWithLevel = true;
@@ -33,7 +34,7 @@ public class Player extends Entity {
     }
 
     @Override
-    void update(float delta) {
+    public void update(float delta) {
         isClimbing = false;
         float velocity = 5;
         float jumpVelocity = 5;
@@ -97,7 +98,7 @@ public class Player extends Entity {
     }
 
     @Override
-    void collide(Entity other, float delta) {
+    public void collide(Entity other, float delta) {
         if (other instanceof Interactable) {
             currentInteractable = (Interactable) other;
             if (Gdx.input.isKeyJustPressed(GameKeys.INTERACT)) {
@@ -117,7 +118,7 @@ public class Player extends Entity {
     Affine2 affine2 = new Affine2();
 
     @Override
-    protected void damage(int value) {
+    public void damage(int value) {
         super.damage(value);
         level.gameScreen.screenShakeTimer = 0.1f;
         if (!level.gameOver) {

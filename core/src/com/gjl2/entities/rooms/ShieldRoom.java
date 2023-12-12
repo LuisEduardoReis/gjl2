@@ -1,4 +1,9 @@
-package com.gjl2;
+package com.gjl2.entities.rooms;
+
+import com.gjl2.*;
+import com.gjl2.entities.Entity;
+import com.gjl2.entities.interactables.Interactable;
+import com.gjl2.entities.Player;
 
 public class ShieldRoom extends Entity implements Interactable {
 

@@ -8,23 +8,24 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gjl2.level.Level;
 
 public class GameScreen extends ScreenAdapter {
 
     private static final float SHAKE_AMOUNT = 0.1f;
-    SpriteBatch spriteBatch;
-    ShapeRenderer shapeRenderer;
-    Level level;
-    Hud hud;
+    public SpriteBatch spriteBatch;
+    public ShapeRenderer shapeRenderer;
+    public Level level;
+    public Hud hud;
 
-    OrthographicCamera camera;
-    Viewport viewport;
+    public OrthographicCamera camera;
+    public Viewport viewport;
 
-    float cameraScale = 12f / Main.WIDTH;
+    public float cameraScale = 12f / Main.WIDTH;
     public float screenShakeTimer = 0;
 
 
-    GameScreen() {
+    public GameScreen() {
         this.spriteBatch = new SpriteBatch();
         this.shapeRenderer = new ShapeRenderer();
 

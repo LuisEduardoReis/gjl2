@@ -1,23 +1,22 @@
-package com.gjl2;
+package com.gjl2.entities.rooms;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.gjl2.*;
+import com.gjl2.entities.*;
+import com.gjl2.entities.interactables.Interactable;
+import com.gjl2.entities.particles.EngineFireParticle;
 
 public class EngineRoom extends Entity implements Interactable, PointableEntity {
 
-    private static final float MIN_LOST_DELAY = 45;
-    private static final float MAX_LOST_DELAY = 60;
-    private static final float FIX_DELAY = 4;
-    float particleTimer = 0;
-    float particleDelay = 0.2f;
+    public float particleTimer = 0;
+    public float particleDelay = 0.2f;
 
-    EngineRoom() {
+    public EngineRoom() {
         radius = 2f;
     }
 
     @Override
-    void update(float delta) {
+    public void update(float delta) {
         super.update(delta);
         if (level.shipState.engineOverloaded) {
             particleTimer = Util.stepTo(particleTimer, 0, delta);

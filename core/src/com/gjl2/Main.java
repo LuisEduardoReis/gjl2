@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
 public class Main extends Game {
-	GameScreen gameScreen;
+	public GameScreen gameScreen;
 
 	public static final int WIDTH = 1920;
 	public static final int HEIGHT = 1080;

@@ -1,11 +1,15 @@
-package com.gjl2;
+package com.gjl2.entities.interactables;
+
+import com.gjl2.Assets;
+import com.gjl2.entities.Entity;
+import com.gjl2.entities.Player;
 
 public class Teleporter extends Entity implements Interactable {
     public int ID;
-    float x;
-    float y;
-    Teleporter linkedTeleporter;
-    Teleporter(int id, float x, float y) {
+    public float x;
+    public float y;
+    public Teleporter linkedTeleporter;
+    public Teleporter(int id, float x, float y) {
         this.ID = id;
         this.x = x;
         this.y = y;
