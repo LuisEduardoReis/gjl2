@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Affine2;
+import text.formic.Stringf;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -119,30 +120,30 @@ public class Hud {
         if (!level.gameOver) {
             font.setColor(level.player.health < 25 ? Color.RED : Color.GREEN);
             if (level.player.health >= 25 || time % 0.5 < 0.25) {
-                font.draw(spriteBatch, String.format("Crew health %d", (int) level.player.health), 25, 350);
+                font.draw(spriteBatch, Stringf.format("Crew health %d", (int) level.player.health), 25, 350);
             }
 
             font.setColor(level.shipState.lost ? Color.RED : Color.GREEN);
             if (!level.shipState.lost || time % 1 < 0.75) {
-                font.draw(spriteBatch, String.format("Earth %.1f ly", level.shipState.distanceToEarth), 25, 280);
+                font.draw(spriteBatch, Stringf.format("Earth %.1f ly", level.shipState.distanceToEarth), 25, 280);
             }
 
             font.setColor(level.shipState.hullStatus < 30 ? Color.RED : Color.GREEN);
-            font.draw(spriteBatch, String.format("Hull status %d%%", level.shipState.hullStatus), 25, 210);
+            font.draw(spriteBatch, Stringf.format("Hull status %d%%", level.shipState.hullStatus), 25, 210);
 
             font.setColor(level.shipState.isOxygenCritical() ? Color.RED : Color.GREEN);
             if (!level.shipState.isOxygenCritical() || time % 1 < 0.75) {
-                font.draw(spriteBatch, String.format("Oxygen level %d%%", (int) level.shipState.oxygenLevel), 25, 140);
+                font.draw(spriteBatch, Stringf.format("Oxygen level %d%%", (int) level.shipState.oxygenLevel), 25, 140);
             }
 
             font.setColor(level.shipState.shieldState < 100 ? Color.RED : Color.BLUE);
-            font.draw(spriteBatch, String.format("Shield energy %d%%", (int) Math.floor(level.shipState.shieldState)), 25, 70);
+            font.draw(spriteBatch, Stringf.format("Shield energy %d%%", (int) Math.floor(level.shipState.shieldState)), 25, 70);
 
             font.setColor(Color.RED);
             if (level.shipState.engineOverloaded) {
-                font.draw(spriteBatch, String.format(String.format("Engine blows up in %.1f", level.shipState.engineBlowupTimer)), 10, Main.HEIGHT - 50);
+                font.draw(spriteBatch, Stringf.format("Engine blows up in %.1f", level.shipState.engineBlowupTimer), 10, Main.HEIGHT - 50);
             } else if (level.gameEvents.timeToNextAsteroid > 0) {
-                font.draw(spriteBatch, String.format(String.format("Asteroid hit in %.1f", level.gameEvents.timeToNextAsteroid)), 10, Main.HEIGHT - 50);
+                font.draw(spriteBatch, Stringf.format("Asteroid hit in %.1f", level.gameEvents.timeToNextAsteroid), 10, Main.HEIGHT - 50);
             }
 
 
